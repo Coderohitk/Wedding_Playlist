@@ -8,11 +8,11 @@ namespace Wedding_Playlist.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class EventController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public EventsController(ApplicationDbContext context)
+        public EventController(ApplicationDbContext context)
         {
             _context = context;
         }
