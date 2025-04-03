@@ -47,44 +47,44 @@ namespace Wedding_Playlist.Controllers
             return Ok(playlistSong);
 
         }
-        [HttpPost]
-        public async Task<ActionResult<PlaylistSong>> CreatePlaylistSong(PlaylistSong playlistSong)
-        {
-            var newPlaylistSong = new PlaylistSong()
-            {
-                PlaylistID = playlistSong.PlaylistID,
-                SongID = playlistSong.SongID,
-                Order = playlistSong.Order,
-            };
-            _context.PlaylistSongs.Add(newPlaylistSong);
-            await _context.SaveChangesAsync();
-            return Ok(newPlaylistSong);
-        }
-        [HttpPut("{id}")]
-        public async Task<ActionResult<PlaylistSong>> UpdatePlaylistSong(int id, PlaylistSong playlistSong)
-        {
-            var playlistSongToUpdate = await _context.PlaylistSongs.FindAsync(id);
-            if (playlistSongToUpdate == null)
-            {
-                return NotFound();
-            }
-            playlistSongToUpdate.PlaylistID = playlistSong.PlaylistID;
-            playlistSongToUpdate.SongID = playlistSong.SongID;
-            playlistSongToUpdate.Order = playlistSong.Order;
-            await _context.SaveChangesAsync();
-            return Ok(playlistSongToUpdate);
-        }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PlaylistSong>> DeletePlaylistSong(int id)
-        {
-            var playlistSong = await _context.PlaylistSongs.FindAsync(id);
-            if (playlistSong == null)
-            {
-                return NotFound();
-            }
-            _context.PlaylistSongs.Remove(playlistSong);
-            await _context.SaveChangesAsync();
-            return Ok(playlistSong);
-        }
+        // [HttpPost]
+        // public async Task<ActionResult<PlaylistSong>> CreatePlaylistSong(PlaylistSong playlistSong)
+        // {
+        //     var newPlaylistSong = new PlaylistSong()
+        //     {
+        //         PlaylistID = playlistSong.PlaylistID,
+        //         SongID = playlistSong.SongID,
+        //         Order = playlistSong.Order,
+        //     };
+        //     _context.PlaylistSongs.Add(newPlaylistSong);
+        //     await _context.SaveChangesAsync();
+        //     return Ok(newPlaylistSong);
+        // }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<PlaylistSong>> UpdatePlaylistSong(int id, PlaylistSong playlistSong)
+        // {
+        //     var playlistSongToUpdate = await _context.PlaylistSongs.FindAsync(id);
+        //     if (playlistSongToUpdate == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     playlistSongToUpdate.PlaylistID = playlistSong.PlaylistID;
+        //     playlistSongToUpdate.SongID = playlistSong.SongID;
+        //     playlistSongToUpdate.Order = playlistSong.Order;
+        //     await _context.SaveChangesAsync();
+        //     return Ok(playlistSongToUpdate);
+        // }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<PlaylistSong>> DeletePlaylistSong(int id)
+        // {
+        //     var playlistSong = await _context.PlaylistSongs.FindAsync(id);
+        //     if (playlistSong == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     _context.PlaylistSongs.Remove(playlistSong);
+        //     await _context.SaveChangesAsync();
+        //     return Ok(playlistSong);
+        // }
     }
 }
