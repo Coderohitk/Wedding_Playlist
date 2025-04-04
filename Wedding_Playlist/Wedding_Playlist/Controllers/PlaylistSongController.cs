@@ -18,90 +18,80 @@ namespace Wedding_Playlist.Controllers
 
         // GET: api/PlaylistSong
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetAllPlaylistSongs()
+        public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylistSongs()
         {
             var playlistSongs = await _context.PlaylistSongs
-                .Select(s => new
+                .Select(s => new PlaylistSongDTO
                 {
-                    s.PlaylistSongId,
-                    s.PlaylistID,
-                    PlaylistName = s.Playlist.Name,
-                    s.SongID,
-                    SongTitle = s.Song.Title,
-                    s.Order
+                    PlaylistSongId = s.PlaylistSongId,
+                    PlaylistId = s.PlaylistID,
+                    SongId = s.SongID,
+                    Order = s.Order
                 }).ToListAsync();
-
             return Ok(playlistSongs);
         }
 
         // GET: api/PlaylistSong/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<object>> GetPlaylistSong(int id)
+        public async Task<ActionResult<PlaylistSongDTO>> GetPlaylistSong(int id)
         {
             var playlistSong = await _context.PlaylistSongs
-                .Where(ps => ps.PlaylistSongId == id)
-                .Select(ps => new
-                {
-                    ps.PlaylistSongId,
-                    ps.PlaylistID,
-                    PlaylistName = ps.Playlist.Name,
-                    ps.SongID,
-                    SongTitle = ps.Song.Title,
-                    ps.Order
-                }).FirstOrDefaultAsync();
-
+                .Where(ps => ps.PlaylistSongId == id).FirstOrDefaultAsync();
             if (playlistSong == null)
             {
                 return NotFound();
             }
-
-            return Ok(playlistSong);
-        }
-
-        // POST: api/PlaylistSong
-        [HttpPost]
-        public async Task<ActionResult<PlaylistSong>> CreatePlaylistSong(PlaylistSong playlistSong)
-        {
-            var newPlaylistSong = new PlaylistSong
+            var playlistSongDTO = new PlaylistSongDTO
             {
-                PlaylistID = playlistSong.PlaylistID,
-                SongID = playlistSong.SongID,
-                Order = playlistSong.Order,
+                PlaylistSongId = playlistSong.PlaylistSongId,
+                PlaylistId = playlistSong.PlaylistID,
+                SongId = playlistSong.SongID,
+                Order = playlistSong.Order
             };
-
-            _context.PlaylistSongs.Add(newPlaylistSong);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPlaylistSong), new { id = newPlaylistSong.PlaylistSongId }, newPlaylistSong);
+            return Ok(playlistSongDTO);
         }
-
-        // PUT: api/PlaylistSong/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult<PlaylistSong>> UpdatePlaylistSong(int id, PlaylistSong playlistSong)
+        [HttpPost]
+        public async Task<ActionResult<PlaylistSongDTO>> CreatePlaylistSong([FromBody] PlaylistSongDTO playlistSongDTO)
         {
-            if (id != playlistSong.PlaylistSongId)
+            if (playlistSongDTO == null)
             {
                 return BadRequest();
             }
+            var newPlaylistSong = new PlaylistSong
+            {
+                PlaylistID = playlistSongDTO.PlaylistId,
+                SongID = playlistSongDTO.SongId,
+                Order = playlistSongDTO.Order
 
+            };
+            _context.PlaylistSongs.Add(newPlaylistSong);
+            await _context.SaveChangesAsync();
+            playlistSongDTO.PlaylistSongId = newPlaylistSong.PlaylistSongId;
+            return CreatedAtAction(nameof(GetPlaylistSong), new { id = newPlaylistSong.PlaylistSongId }, playlistSongDTO);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<PlaylistSongDTO>> UpdatePlaylistSong([FromRoute] int id, [FromBody] PlaylistSongDTO playlistSongDTO)
+        {
+            if (id != playlistSongDTO.PlaylistSongId)
+            {
+                return BadRequest();
+            }
             var playlistSongToUpdate = await _context.PlaylistSongs.FindAsync(id);
             if (playlistSongToUpdate == null)
             {
                 return NotFound();
             }
 
-            playlistSongToUpdate.PlaylistID = playlistSong.PlaylistID;
-            playlistSongToUpdate.SongID = playlistSong.SongID;
-            playlistSongToUpdate.Order = playlistSong.Order;
+            playlistSongToUpdate.PlaylistID = playlistSongDTO.PlaylistId;
+            playlistSongToUpdate.SongID = playlistSongDTO.SongId;
+            playlistSongToUpdate.Order = playlistSongDTO.Order;
 
             await _context.SaveChangesAsync();
 
             return Ok(playlistSongToUpdate);
         }
-
-        // DELETE: api/PlaylistSong/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PlaylistSong>> DeletePlaylistSong(int id)
+        public async Task<ActionResult<PlaylistSongDTO>> DeletePlaylistSong([FromRoute] int id)
         {
             var playlistSong = await _context.PlaylistSongs.FindAsync(id);
             if (playlistSong == null)
@@ -116,3 +106,4 @@ namespace Wedding_Playlist.Controllers
         }
     }
 }
+
