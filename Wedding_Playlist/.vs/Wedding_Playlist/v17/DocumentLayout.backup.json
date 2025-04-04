@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\controllers\\playlistsongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\controllers\\playlistsongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\models\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\models\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -36,10 +44,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_Wedding_Playlist_d696b3bd_b3e7_478e_9028_88fdac6857b4/True/SqlTable/dbo.Events.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|solutionrelative:wedding_playlist\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B04D094F-0BBC-425A-93BB-3F2849AACB73}|Wedding_Playlist\\Wedding_Playlist.csproj|c:\\users\\rohit kumar\\documents\\programing class\\semester 2\\back-end-2\\wedding_playlist\\wedding_playlist\\wedding_playlist\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -81,7 +85,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 198,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -96,13 +100,34 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PlaylistSongController.cs",
+              "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\PlaylistSongController.cs",
+              "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\PlaylistSongController.cs",
+              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\PlaylistSongController.cs",
+              "RelativeToolTip": "Wedding_Playlist\\Controllers\\PlaylistSongController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T18:45:24.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "PlaylistController.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\PlaylistController.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\PlaylistController.cs",
-              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\PlaylistController.cs*",
-              "RelativeToolTip": "Wedding_Playlist\\Controllers\\PlaylistController.cs*",
+              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\PlaylistController.cs",
+              "RelativeToolTip": "Wedding_Playlist\\Controllers\\PlaylistController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-21T03:51:54.002Z",
@@ -110,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "SongController.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\SongController.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\SongController.cs",
@@ -122,25 +147,33 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GuestController.cs",
-              "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\GuestController.cs",
-              "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\GuestController.cs",
-              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\GuestController.cs*",
-              "RelativeToolTip": "Wedding_Playlist\\Controllers\\GuestController.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Program.cs",
+              "RelativeDocumentMoniker": "Wedding_Playlist\\Program.cs",
+              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Program.cs",
+              "RelativeToolTip": "Wedding_Playlist\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T03:45:49.205Z",
+              "WhenOpened": "2025-03-20T21:50:48.534Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
+              "Title": "GuestController.cs",
+              "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\GuestController.cs",
+              "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\GuestController.cs",
+              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\GuestController.cs",
+              "RelativeToolTip": "Wedding_Playlist\\Controllers\\GuestController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T03:45:49.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Views\\Shared\\_Layout.cshtml",
@@ -152,20 +185,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Song.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Song.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\Song.cs",
-              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Song.cs*",
-              "RelativeToolTip": "Wedding_Playlist\\Models\\Song.cs*",
+              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Song.cs",
+              "RelativeToolTip": "Wedding_Playlist\\Models\\Song.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAYwBUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:38:09.916Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T21:38:09.916Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Playlist.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Playlist.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\Playlist.cs",
@@ -173,16 +205,11 @@
               "RelativeToolTip": "Wedding_Playlist\\Models\\Playlist.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:38:31.467Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "WhenOpened": "2025-03-20T21:38:31.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "EventController.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Controllers\\EventController.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Controllers\\EventController.cs",
@@ -190,12 +217,11 @@
               "RelativeToolTip": "Wedding_Playlist\\Controllers\\EventController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:47:59.286Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T21:47:59.286Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Event.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Event.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\Event.cs",
@@ -203,24 +229,11 @@
               "RelativeToolTip": "Wedding_Playlist\\Models\\Event.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:35:23.557Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T21:35:23.557Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Program.cs",
-              "RelativeDocumentMoniker": "Wedding_Playlist\\Program.cs",
-              "ToolTip": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Program.cs",
-              "RelativeToolTip": "Wedding_Playlist\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:50:48.534Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "dbo.Events.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_Wedding_Playlist_d696b3bd_b3e7_478e_9028_88fdac6857b4/True/SqlTable/dbo.Events.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_Wedding_Playlist_d696b3bd_b3e7_478e_9028_88fdac6857b4/True/SqlTable/dbo.Events.sql",
@@ -229,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Guest.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\Guest.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\Guest.cs",
@@ -237,12 +250,11 @@
               "RelativeToolTip": "Wedding_Playlist\\Models\\Guest.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAYwA4AAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:36:44.283Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T21:36:44.283Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "20250320214643_initial-create.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Data\\Migrations\\20250320214643_initial-create.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Data\\Migrations\\20250320214643_initial-create.cs",
@@ -254,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Data\\ApplicationDbContext.cs",
@@ -266,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "00000000000000_CreateIdentitySchema.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
@@ -278,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "PlaylistSong.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\PlaylistSong.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\PlaylistSong.cs",
@@ -290,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "GuestSongRequest.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\GuestSongRequest.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\GuestSongRequest.cs",
@@ -302,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "EventSong.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\EventSong.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\EventSong.cs",
@@ -314,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "EventGuest.cs",
               "DocumentMoniker": "C:\\Users\\Rohit kumar\\Documents\\Programing class\\Semester 2\\Back-end-2\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Models\\EventGuest.cs",
               "RelativeDocumentMoniker": "Wedding_Playlist\\Models\\EventGuest.cs",

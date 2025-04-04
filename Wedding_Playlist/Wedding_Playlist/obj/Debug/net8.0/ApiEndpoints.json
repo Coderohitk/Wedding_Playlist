@@ -327,6 +327,125 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
+    "Method": "GetAllPlaylistSongs",
+    "RelativePath": "api/PlaylistSong",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
+    "Method": "CreatePlaylistSong",
+    "RelativePath": "api/PlaylistSong",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistSong",
+        "Type": "Wedding_Playlist.Models.PlaylistSong",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Wedding_Playlist.Models.PlaylistSong",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
+    "Method": "GetPlaylistSong",
+    "RelativePath": "api/PlaylistSong/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
+    "Method": "UpdatePlaylistSong",
+    "RelativePath": "api/PlaylistSong/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "playlistSong",
+        "Type": "Wedding_Playlist.Models.PlaylistSong",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Wedding_Playlist.Models.PlaylistSong",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
+    "Method": "DeletePlaylistSong",
+    "RelativePath": "api/PlaylistSong/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Wedding_Playlist.Models.PlaylistSong",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "WeddingPlaylist.Controllers.SongController",
     "Method": "GetSongs",
     "RelativePath": "api/Song",
