@@ -11,4 +11,10 @@ namespace Wedding_Playlist.Models
         public int SongId { get; set; }
         public Song Song { get; set; }
     }
+    public class EventSongDTO
+    {
+        public int EventSongId { get; set; }
+        public int EventId { get; set; }
+        public int SongId { get; set; }
+    }
 }
