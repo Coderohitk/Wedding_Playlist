@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rzuP2xo+E20=",
+  "dgSpecHash": "xly1E332zUY=",
   "success": true,
-  "projectFilePath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
+  "projectFilePath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
   "expectedPackageFiles": [
     "/Users/sarrahgandhi/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/sarrahgandhi/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",

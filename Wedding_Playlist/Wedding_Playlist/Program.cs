@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Wedding_Playlist.Data;
+using Wedding_Playlist.Interfaces;
+using CoreEntityFramework.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IEventGuestService, EventGuestService>();
+builder.Services.AddScoped<ISongService, SongService>();
+builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj": {}
+    "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj": {}
   },
   "projects": {
-    "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj": {
+    "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
+        "projectUniqueName": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
         "projectName": "Wedding_Playlist",
-        "projectPath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
+        "projectPath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist.csproj",
         "packagesPath": "/Users/sarrahgandhi/.nuget/packages/",
-        "outputPath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/obj/",
+        "outputPath": "/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/sarrahgandhi/.nuget/NuGet/NuGet.Config"
