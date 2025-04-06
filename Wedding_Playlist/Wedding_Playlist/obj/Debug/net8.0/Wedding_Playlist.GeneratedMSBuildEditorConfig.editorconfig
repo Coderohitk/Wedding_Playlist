@@ -9,65 +9,113 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Wedding_Playlist
 build_property.RootNamespace = Wedding_Playlist
-build_property.ProjectDir = /Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/
+build_property.ProjectDir = D:\zz Others\Programing class\Semester 2\Back-end-2\Wedding_Playlist\Wedding_Playlist\Wedding_Playlist\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist
+build_property.MSBuildProjectDirectory = D:\zz Others\Programing class\Semester 2\Back-end-2\Wedding_Playlist\Wedding_Playlist\Wedding_Playlist
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Areas/Identity/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXZlbnRQYWdlL0NyZWF0ZS5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRQYWdlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXZlbnRQYWdlL0RlbGV0ZS5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRQYWdlXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXZlbnRQYWdlL0VkaXQuY3NodG1s
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRQYWdlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/ListEvent.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXZlbnRQYWdlL0xpc3RFdmVudC5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/EventPage/ListEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRQYWdlXExpc3RFdmVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/GuestPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3Vlc3RQYWdlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/GuestPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3Vlc3RQYWdlXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/GuestPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3Vlc3RQYWdlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/GuestPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3Vlc3RQYWdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWxpc3RQYWdlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Final/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-3gmrpzmskz
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWxpc3RQYWdlXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWxpc3RQYWdlXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/ListPlaylist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWxpc3RQYWdlXExpc3RQbGF5bGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/SongPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29uZ1BhZ2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/SongPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29uZ1BhZ2VcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/SongPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29uZ1BhZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/SongPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29uZ1BhZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/zz Others/Programing class/Semester 2/Back-end-2/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-cl8kwsehcx

@@ -89,14 +89,21 @@ namespace MilestoneManager.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var playlist = await _playlistService.GetPlaylist(id);
+            if (playlist == null)
+            {
+                return NotFound(); // Prevents the null reference
+            }
+
             var playlistDto = new PlaylistDTO
             {
-                PlaylistID = id,
+                PlaylistID = playlist.PlaylistID,
                 Name = playlist.Name,
                 CreatedBy = playlist.CreatedBy
             };
+
             return View(playlistDto);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePlaylist(int id)
