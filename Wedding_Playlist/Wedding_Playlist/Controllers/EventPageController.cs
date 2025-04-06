@@ -72,17 +72,29 @@ namespace Wedding_Playlist.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditEvent(int id, EventDTO eventDTO)
+        public async Task<IActionResult> Edit(int id, EventDTO eventDTO)
         {
             var response = await _eventService.UpdateEvent(eventDTO);
-            var eventDTO1 = new EventDTO()
+
+            if (response.Status == ServiceResponse.ServiceStatus.Updated)
             {
-                EventId = eventDTO.EventId,
-                Name = eventDTO.Name,
-                Date = eventDTO.Date,
-                Location = eventDTO.Location
-            };
-            return View(eventDTO1);
+                // ? Go back to the list page after a successful update
+                return RedirectToAction("ListEvent", "EventPage");
+            }
+
+            // ? If something went wrong, return the same view with the current model
+            return View(eventDTO);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var eventDTO = await _eventService.GetEventById(id);
+            if (eventDTO == null)
+            {
+                return NotFound();
+            }
+
+            return View(eventDTO); // This will render your delete confirmation page
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -363,8 +363,9 @@ namespace Wedding_Playlist.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlaylistID"));
 
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
