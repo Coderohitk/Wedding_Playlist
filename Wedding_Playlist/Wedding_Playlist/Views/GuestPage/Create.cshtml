@@ -1,0 +1,44 @@
+﻿@model Wedding_Playlist.Models.GuestDTO
+@{
+    ViewData["Title"] = "Create Guest";
+}
+
+<div class="container admin-form-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card admin-card">
+                <div class="admin-card-header">
+                    Add New Guest
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="RSVP_Status" class="control-label"></label>
+                            <input asp-for="RSVP_Status" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Side" class="control-label"></label>
+                            <input asp-for="Side" class="form-control" />
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary mt-3">Add Guest</button>
+                            <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
