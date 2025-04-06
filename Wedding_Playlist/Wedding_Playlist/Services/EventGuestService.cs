@@ -1,10 +1,7 @@
-using Wedding_Playlist.Data;
-using System;
-
 using Wedding_Playlist.Models;
-using Microsoft.EntityFrameworkCore;
+using Wedding_Playlist.Data;
 using Wedding_Playlist.Interfaces;
-
+using Microsoft.EntityFrameworkCore;
 namespace CoreEntityFramework.Services
 {
     public class EventGuestService : IEventGuestService
@@ -17,20 +14,21 @@ namespace CoreEntityFramework.Services
         public async Task<IEnumerable<EventGuest>> GetEventGuests()
         {
             List<EventGuest> eventGuests = await _context.EventGuests.ToListAsync();
-            List<EventGuest> eventGuestList = new List<EventGuest>();
-            foreach (var eventGuest in eventGuests)
+            List<EventGuest> eventGuestsList = new List<EventGuest>();
+            foreach (EventGuest eventGuest in eventGuests)
             {
-                eventGuestList.Add(new EventGuest()
+                eventGuestsList.Add(new EventGuest()
                 {
-                    GuestEventId = eventGuest.GuestEventId,
+                    EventGuestId = eventGuest.EventGuestId,
                     EventId = eventGuest.EventId,
                     GuestId = eventGuest.GuestId,
-                    EventMen = eventGuest.EventMen,
-                    EventWomen = eventGuest.EventWomen,
-                    EventKids = eventGuest.EventKids
+                    Guest = eventGuest.Guest,
+
+
+
                 });
             }
-            return eventGuestList;
+            return eventGuestsList;
         }
         public async Task<EventGuest> GetEventGuestById(int id)
         {
@@ -39,98 +37,23 @@ namespace CoreEntityFramework.Services
             {
                 return null;
             }
-            EventGuest eventGuests = new EventGuest()
+            EventGuest eventGuestDTO = new EventGuest()
             {
-                GuestEventId = eventGuest.GuestEventId,
+                EventGuestId = eventGuest.EventGuestId,
                 EventId = eventGuest.EventId,
-                EventMen = eventGuest.EventMen,
-                EventWomen = eventGuest.EventWomen,
-                EventKids = eventGuest.EventKids
+                GuestId = eventGuest.GuestId
+
+
             };
-            return eventGuests;
+            return eventGuestDTO;
         }
-        public async Task<List<EventGuest>> GetEventGuestByEvent(int eventId)
-        {
-            var eventGuests = await _context.EventGuests.Where(x => x.EventId == eventId).ToListAsync();
-            if (eventGuests == null)
-            {
-                return null;
-            }
-            List<EventGuest> eventGuestList = new List<EventGuest>();
-            foreach (var eventGuest in eventGuests)
-            {
-                eventGuestList.Add(new EventGuest()
-                {
-                    GuestEventId = eventGuest.GuestEventId,
-                    EventId = eventGuest.EventId,
-                    GuestId = eventGuest.GuestId,
-                    EventMen = eventGuest.EventMen,
-                    EventWomen = eventGuest.EventWomen,
-                    EventKids = eventGuest.EventKids
-                });
-
-            }
-            return eventGuestList;
-        }
-        public async Task<List<EventGuest>> GetEventGuestByGuest(int guestId)
-        {
-            var eventGuests = await _context.EventGuests.Where(x => x.GuestId == guestId).ToListAsync();
-            if (eventGuests == null)
-            {
-                return null;
-            }
-            List<EventGuest> eventGuestList = new List<EventGuest>();
-            foreach (var eventGuest in eventGuests)
-            {
-                eventGuestList.Add(new EventGuest()
-                {
-                    GuestEventId = eventGuest.GuestEventId,
-                    EventId = eventGuest.EventId,
-                    GuestId = eventGuest.GuestId,
-                    EventMen = eventGuest.EventMen,
-                    EventWomen = eventGuest.EventWomen,
-                    EventKids = eventGuest.EventKids
-                });
-
-            }
-            return eventGuestList;
-        }
-        public async Task<List<EventGuest>> GetEventGuestsByIsRSVPAccepted(bool isRSVPAccepted)
-        {
-            return await _context.EventGuests
-                                 .Where(e => e.IsRSVPAccepted == isRSVPAccepted)
-                                 .ToListAsync();
-        }
-        public async Task<List<EventGuest>> GetEventGuestsByEventMen(int eventMen)
-        {
-            return await _context.EventGuests
-                                 .Where(e => e.EventMen == eventMen)
-                                 .ToListAsync();
-        }
-        public async Task<List<EventGuest>> GetEventGuestsByEventWomen(int eventWomen)
-        {
-            return await _context.EventGuests
-                                 .Where(e => e.EventWomen == eventWomen)
-                                 .ToListAsync();
-        }
-        public async Task<List<EventGuest>> GetEventGuestsByEventKids(int eventKids)
-        {
-            return await _context.EventGuests
-                                 .Where(e => e.EventKids == eventKids)
-                                 .ToListAsync();
-        }
-        public async Task<ServiceResponse> AddEventGuest(EventGuestDto eventGuestDto)
+        public async Task<ServiceResponse> AddEventGuest(EventGuestDTO eventGuestDTO)
         {
             ServiceResponse serviceResponse = new ServiceResponse();
             EventGuest eventGuest = new EventGuest()
             {
-
-                EventId = eventGuestDto.EventId,
-                EventMen = eventGuestDto.EventMen,
-                EventWomen = eventGuestDto.EventWomen,
-                EventKids = eventGuestDto.EventKids,
-                GuestId = eventGuestDto.GuestId,
-                IsRSVPAccepted = eventGuestDto.IsRSVPAccepted
+                EventId = eventGuestDTO.EventId,
+                GuestId = eventGuestDTO.GuestId
             };
             try
             {
@@ -144,59 +67,58 @@ namespace CoreEntityFramework.Services
                 return serviceResponse;
             }
             serviceResponse.Status = ServiceResponse.ServiceStatus.Created;
-            serviceResponse.CreatedId = eventGuest.GuestEventId;
+            serviceResponse.Messages.Add("Event Guest Added Successfully");
             return serviceResponse;
         }
-        public async Task<ServiceResponse> UpdateEventGuest(EventGuestDto eventGuest)
+        public async Task<ServiceResponse> UpdateEventGuest(EventGuestDTO eventGuestDTO)
         {
             ServiceResponse serviceResponse = new ServiceResponse();
-            EventGuest addEventGuest = new EventGuest()
+            EventGuest eventGuest = new EventGuest()
             {
-                GuestEventId = eventGuest.GuestEventId,
-                EventId = eventGuest.EventId,
-                GuestId = eventGuest.GuestId,
-                EventMen = eventGuest.EventMen,
-                EventWomen = eventGuest.EventWomen,
-                EventKids = eventGuest.EventKids
+                EventGuestId = eventGuestDTO.EventGuestId,
+                EventId = eventGuestDTO.EventId,
+                GuestId = eventGuestDTO.GuestId
             };
-            _context.Entry(addEventGuest).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                serviceResponse.Status = ServiceResponse.ServiceStatus.Error;
-                serviceResponse.Messages.Add("Update Failed");
-                return serviceResponse;
-            }
-            serviceResponse.Status = ServiceResponse.ServiceStatus.Updated;
-            return serviceResponse;
-
-        }
-        public async Task<ServiceResponse> DeleteEventGuest(int id)
-        {
-            ServiceResponse response = new ServiceResponse();
-            var eventGuest = await _context.EventGuests.FindAsync(id);
-            if (eventGuest == null)
-            {
-                response.Status = ServiceResponse.ServiceStatus.NotFound;
-                response.Messages.Add("EventGuest Not Found");
-                return response;
-            }
-            try
-            {
-                _context.EventGuests.Remove(eventGuest);
+                _context.EventGuests.Update(eventGuest);
                 await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {
-                response.Status = ServiceResponse.ServiceStatus.Error;
-                response.Messages.Add(e.Message);
-                return response;
+                serviceResponse.Status = ServiceResponse.ServiceStatus.Error;
+                serviceResponse.Messages.Add(e.Message);
+                return serviceResponse;
             }
-            response.Status = ServiceResponse.ServiceStatus.Deleted;
-            return response;
+            serviceResponse.Status = ServiceResponse.ServiceStatus.Updated;
+            serviceResponse.Messages.Add("Event Guest Updated Successfully");
+            return serviceResponse;
         }
+        public async Task<ServiceResponse> DeleteEventGuest(int id)
+        {
+            ServiceResponse serviceResponse = new ServiceResponse();
+            EventGuest eventGuest = await _context.EventGuests.FindAsync(id);
+            if (eventGuest == null)
+            {
+                serviceResponse.Status = ServiceResponse.ServiceStatus.NotFound;
+                serviceResponse.Messages.Add("Event Guest Not Found");
+                return serviceResponse;
+            }
+            _context.EventGuests.Remove(eventGuest);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Status = ServiceResponse.ServiceStatus.Error;
+                serviceResponse.Messages.Add(e.Message);
+                return serviceResponse;
+            }
+            serviceResponse.Status = ServiceResponse.ServiceStatus.Deleted;
+            serviceResponse.Messages.Add("Event Guest Deleted Successfully");
+            return serviceResponse;
+        }
+
     }
 }

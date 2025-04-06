@@ -1,7 +1,5 @@
-using MilestoneManager.Interfaces;
 using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Models;
-using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Data;
 using Microsoft.EntityFrameworkCore;
 namespace CoreEntityFramework.Services
@@ -25,7 +23,7 @@ namespace CoreEntityFramework.Services
                 ICollection<GuestSongRequest> guestSongRequests = new List<GuestSongRequest>();
                 songList.Add(new Song()
                 {
-                    SongID = song.SongID,
+                    SongId = song.SongId,
                     Title = song.Title,
                     Artist = song.Artist,
                     Genre = song.Genre,
@@ -47,7 +45,7 @@ namespace CoreEntityFramework.Services
             }
             Song song1 = new Song()
             {
-                SongID = song.SongID,
+                SongId = song.SongId,
                 Title = song.Title,
                 Artist = song.Artist,
                 Genre = song.Genre,
@@ -79,14 +77,14 @@ namespace CoreEntityFramework.Services
                 serviceResponse.Messages.Add(ex.Message);
             }
             serviceResponse.Status = ServiceResponse.ServiceStatus.Created;
-            serviceResponse.CreatedId = song.SongID;
+            serviceResponse.CreatedId = song.SongId;
             return serviceResponse;
 
         }
         public async Task<ServiceResponse> UpdateSong(SongDTO songDTO)
         {
             ServiceResponse serviceResponse = new ServiceResponse();
-            if (songDTO.SongID == null)
+            if (songDTO.SongId == null)
             {
                 serviceResponse.Status = ServiceResponse.ServiceStatus.Error;
                 serviceResponse.Messages.Add("SongID cannot be null");
@@ -94,7 +92,7 @@ namespace CoreEntityFramework.Services
             }
             Song addsong = new Song()
             {
-                SongID = songDTO.SongID,
+                SongId = songDTO.SongId,
                 Title = songDTO.Title,
                 Artist = songDTO.Artist,
                 Genre = songDTO.Genre,

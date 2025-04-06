@@ -19,7 +19,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IEventService, EventService>();
-builder.Services.AddScoped<IEventGuestService, EventGuestService>();
 builder.Services.AddScoped<ISongService, SongService>();
 builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 builder.Services.AddEndpointsApiExplorer();
