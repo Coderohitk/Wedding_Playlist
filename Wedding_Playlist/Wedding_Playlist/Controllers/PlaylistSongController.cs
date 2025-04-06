@@ -16,16 +16,15 @@ namespace Wedding_Playlist.Controllers
             _context = context;
         }
 
-        // GET: api/PlaylistSong
-        [HttpGet]
+        // GET: api/PlaylistSong [HttpGet]
         public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylistSongs()
         {
             var playlistSongs = await _context.PlaylistSongs
                 .Select(s => new PlaylistSongDTO
                 {
                     PlaylistSongId = s.PlaylistSongId,
-                    PlaylistId = s.PlaylistID,
-                    SongId = s.SongID,
+                    PlaylistID = s.PlaylistID,
+                    SongID = s.SongID,
                     Order = s.Order
                 }).ToListAsync();
             return Ok(playlistSongs);
@@ -44,8 +43,8 @@ namespace Wedding_Playlist.Controllers
             var playlistSongDTO = new PlaylistSongDTO
             {
                 PlaylistSongId = playlistSong.PlaylistSongId,
-                PlaylistId = playlistSong.PlaylistID,
-                SongId = playlistSong.SongID,
+                PlaylistID = playlistSong.PlaylistID,
+                SongID = playlistSong.SongID,
                 Order = playlistSong.Order
             };
             return Ok(playlistSongDTO);
@@ -59,8 +58,8 @@ namespace Wedding_Playlist.Controllers
             }
             var newPlaylistSong = new PlaylistSong
             {
-                PlaylistID = playlistSongDTO.PlaylistId,
-                SongID = playlistSongDTO.SongId,
+                PlaylistID = playlistSongDTO.PlaylistID,
+                SongID = playlistSongDTO.SongID,
                 Order = playlistSongDTO.Order
 
             };
@@ -82,8 +81,8 @@ namespace Wedding_Playlist.Controllers
                 return NotFound();
             }
 
-            playlistSongToUpdate.PlaylistID = playlistSongDTO.PlaylistId;
-            playlistSongToUpdate.SongID = playlistSongDTO.SongId;
+            playlistSongToUpdate.PlaylistID = playlistSongDTO.PlaylistID;
+            playlistSongToUpdate.SongID = playlistSongDTO.SongID;
             playlistSongToUpdate.Order = playlistSongDTO.Order;
 
             await _context.SaveChangesAsync();

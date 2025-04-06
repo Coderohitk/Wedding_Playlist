@@ -20,7 +20,7 @@ namespace Wedding_Playlist.Models
     {
         public int PlaylistSongId { get; set; }
         public int Order { get; set; }
-        public int PlaylistId { get; set; }
-        public int SongId { get; set; }
+        public int PlaylistID { get; set; }
+        public int SongID { get; set; }
     }
 }

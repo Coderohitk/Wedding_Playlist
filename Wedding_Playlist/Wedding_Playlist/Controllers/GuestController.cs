@@ -1,128 +1,102 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
-using Wedding_Playlist.Data;
+using Wedding_Playlist.Interfaces;
 
-namespace WeddingPlaylist.Controllers
+namespace MilestoneManager.Controllers
 {
-    [Route("api/[controller]")] // Base route: api/guest
     [ApiController]
-    public class GuestController : ControllerBase
+    [Route("api/[controller]")]
+    public class GuestAPIController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public GuestController(ApplicationDbContext context)
+        private readonly IGuestService _guestService;
+        public GuestAPIController(IGuestService guestService)
         {
-            _context = context;
+            _guestService = guestService;
+        }
+        /// <summary>
+        /// Retrieves a list of all guests stored in the system.  
+        /// This method asynchronously calls the guest service to fetch all available guests.  
+        /// It returns an `IEnumerable<Guest>` wrapped in an `ActionResult`.  
+        /// If successful, it responds with an HTTP 200 status along with the list of guests.  
+        /// If there are no guests, it still returns an empty list rather than an error.  
+        /// This method does not require any parameters.
+        /// </summary>
+        [HttpGet("Guest")]
+        public async Task<ActionResult<IEnumerable<Guest>>> GetGuest()
+        {
+            IEnumerable<Guest> guest = await _guestService.GetGuests();
+            return Ok(guest);
         }
 
-        // ✅ GET: api/guest - Retrieve all guests
-        [HttpGet]
-        [Route(template:"ListGuest")]
-        public async Task<ActionResult<IEnumerable<GuestDTO>>> GetGuests()
+        /// <summary>
+        /// Fetches a specific guest by their unique ID.  
+        /// The method takes an integer `id` as a parameter and queries the service for a matching guest.  
+        /// If a guest is found, it returns an HTTP 200 response with the guest details.  
+        /// If no guest matches the provided ID, it returns an HTTP 404 Not Found response.  
+        /// This helps ensure that only valid guest records are accessed in the system.  
+        /// The method is useful for retrieving guest details in a detailed view.
+        /// </summary>
+        [HttpGet("GetGuestById")]
+        public async Task<ActionResult<Guest>> FindGuest(int id)
         {
-            var guests = await _context.Guests
-                .Select(g => new GuestDTO
-                {
-                    GuestId = g.GuestId,
-                    Name = g.Name,
-                    Email = g.Email,
-                    RSVP_Status = g.RSVP_Status,
-                    Side = g.Side
-                })
-                .ToListAsync();
-
-            return Ok(guests);
-        }
-
-        // ✅ GET: api/guest/{id} - Retrieve a guest by ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GuestDTO>> GetGuest([FromRoute] int id)
-        {
-            var guest = await _context.Guests.FindAsync(id);
+            var guest = await _guestService.GetGuestById(id);
             if (guest == null)
             {
                 return NotFound();
             }
-
-            var guestDTO = new GuestDTO
+            else
             {
-                GuestId = guest.GuestId,
-                Name = guest.Name,
-                Email = guest.Email,
-                RSVP_Status = guest.RSVP_Status,
-                Side = guest.Side
-            };
-
-            return Ok(guestDTO);
+                return Ok(guest);
+            }
         }
 
-        // ✅ POST: api/guest - Create a new guest
-        [HttpPost]
-        public async Task<ActionResult<GuestDTO>> CreateGuest([FromBody] GuestDTO guestDTO)
+        /// <summary>
+        /// Updates an existing guest's details in the system.  
+        /// It requires the guest ID as a URL parameter and the updated `Guest` object in the request body.  
+        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
+        /// If the guest does not exist, an HTTP 404 Not Found response is returned.  
+        /// On successful update, the method returns an HTTP 204 No Content response.  
+        /// This ensures that modifications to guest details are properly validated and processed.
+        /// </summary>
+        [HttpPut("UpdateGuest/{id}")]
+        public async Task<ActionResult> UpdateGuest(int id, GuestDTO updateguest)
         {
-            if (guestDTO == null)
+            if (id != updateguest.GuestId)
             {
-                return BadRequest("Invalid guest data.");
+                return BadRequest();
             }
-
-            var guest = new Guest
+            ServiceResponse response = await _guestService.UpdateGuest(updateguest);
+            if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
-                Name = guestDTO.Name,
-                Email = guestDTO.Email,
-                RSVP_Status = guestDTO.RSVP_Status,
-                Side = guestDTO.Side
-            };
-
-            _context.Guests.Add(guest);
-            await _context.SaveChangesAsync();
-
-            guestDTO.GuestId = guest.GuestId; // Assign the newly created ID
-            return CreatedAtAction(nameof(GetGuest), new { id = guest.GuestId }, guestDTO);
-        }
-
-        // ✅ PUT: api/guest/{id} - Update guest details
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGuest([FromRoute] int id, [FromBody] GuestDTO guestDTO)
-        {
-            if (id != guestDTO.GuestId)
-            {
-                return BadRequest("Guest ID mismatch.");
+                return NotFound(response.Messages);
             }
-
-            var guest = await _context.Guests.FindAsync(id);
-            if (guest == null)
+            else if (response.Status == ServiceResponse.ServiceStatus.Error)
             {
-                return NotFound();
+                return StatusCode(500, response.Messages);
             }
-
-            // Update the guest details
-            guest.Name = guestDTO.Name;
-            guest.Email = guestDTO.Email;
-            guest.RSVP_Status = guestDTO.RSVP_Status;
-            guest.Side = guestDTO.Side;
-
-            _context.Entry(guest).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
-
-        // ✅ DELETE: api/guest/{id} - Delete a guest
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGuest([FromRoute] int id)
+        /// <summary>
+        /// Deletes a guest from the system based on their unique ID.  
+        /// It accepts an integer `id` as a parameter and attempts to remove the corresponding guest record.  
+        /// If the guest exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
+        /// If the guest does not exist, an HTTP 404 Not Found response is returned.  
+        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
+        /// This method ensures proper deletion while handling errors gracefully.
+        /// </summary>
+        [HttpDelete("DeleteGuest/{id}")]
+        public async Task<ActionResult<Guest>> DeleteGuest(int id)
         {
-            var guest = await _context.Guests.FindAsync(id);
-            if (guest == null)
+            ServiceResponse response = await _guestService.DeleteGuest(id);
+            if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
-                return NotFound();
+                return NotFound(response.Messages);
             }
-
-            _context.Guests.Remove(guest);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            else if (response.Status == ServiceResponse.ServiceStatus.Error)
+            {
+                return StatusCode(500, response.Messages);
+            }
+            return Ok(response.Messages);
         }
     }
 }

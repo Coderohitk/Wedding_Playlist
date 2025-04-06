@@ -1,118 +1,123 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Wedding_Playlist.Models;
-using Wedding_Playlist.Data;
+using Wedding_Playlist.Interfaces;
 
-namespace WeddingPlaylist.Controllers
+namespace Wedding_Playlist.Controllers
 {
-    [Route("api/[controller]")] // Base route: api/playlist
     [ApiController]
-    public class PlaylistController : ControllerBase
+    [Route("api/[controller]")]
+    public class PlaylistAPIController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public PlaylistController(ApplicationDbContext context)
+        private readonly IPlaylistService _playlistService;
+        public PlaylistAPIController(IPlaylistService playlistService)
         {
-            _context = context;
+            _playlistService = playlistService;
         }
-
-        // ✅ GET: api/playlist - Retrieve all playlists
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetPlaylists()
+        /// <summary>
+        /// Retrieves a list of all playlists stored in the system.  
+        /// This method asynchronously calls the playlist service to fetch all available playlists.  
+        /// It returns an `IEnumerable<Playlist>` wrapped in an `ActionResult`.  
+        /// If successful, it responds with an HTTP 200 status along with the list of playlists.  
+        /// If there are no playlists, it still returns an empty list rather than an error.  
+        /// This method does not require any parameters.
+        /// </summary>
+        [HttpGet("Playlist")]
+        public async Task<ActionResult<IEnumerable<Playlist>>> GetAllPlaylists()
         {
-            var playlists = await _context.Playlists
-                .Select(p => new PlaylistDTO
-                {
-                    PlaylistID = p.PlaylistID,
-                    Name = p.Name,
-                    CreatedBy = p.CreatedBy
-                })
-                .ToListAsync();
-
-            return Ok(playlists);
+            IEnumerable<Playlist> playlist = await _playlistService.GetAllPlaylists();
+            return Ok(playlist);
         }
-
-        // ✅ GET: api/playlist/{id} - Retrieve a playlist by ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PlaylistDTO>> GetPlaylist([FromRoute] int id)
+        /// <summary>
+        /// Fetches a specific playlist by their unique ID.  
+        /// The method takes an integer `id` as a parameter and queries the service for a matching playlist.  
+        /// If a playlist is found, it returns an HTTP 200 response with the playlist details.  
+        /// If no playlist matches the provided ID, it returns an HTTP 404 Not Found response.  
+        /// This helps ensure that only valid playlist records are accessed in the system.  
+        /// The method is useful for retrieving playlist details in a detailed view.
+        /// </summary>
+        [HttpGet("GetPlaylistById")]
+        public async Task<ActionResult<Playlist>> GetPlaylist(int id)
         {
-            var playlist = await _context.Playlists.FindAsync(id);
+            var playlist = await _playlistService.GetPlaylist(id);
             if (playlist == null)
             {
                 return NotFound();
             }
-
-            var playlistDTO = new PlaylistDTO
+            else
             {
-                PlaylistID = playlist.PlaylistID,
-                Name = playlist.Name,
-                CreatedBy = playlist.CreatedBy
-            };
-
-            return Ok(playlistDTO);
+                return Ok(playlist);
+            }
         }
-
-        // ✅ POST: api/playlist - Create a new playlist
-        [HttpPost]
-        public async Task<ActionResult<PlaylistDTO>> CreatePlaylist([FromBody] PlaylistDTO playlistDTO)
+        /// <summary>
+        /// Retrieves a list of playlists based on their assigned category.  
+        /// The method takes a `PlaylistCategory` enum as a parameter to filter playlists accordingly.  
+        /// It queries the playlist service and returns a list of matching playlists, wrapped in an HTTP 200 response.  
+        /// If no playlists are found in the specified category, an HTTP 404 Not Found response is returned.  
+        /// This method helps in segmenting playlists into different categories for better organization.  
+        /// Useful for event planners who need to sort playlists based on roles like VIPs or general attendees.
+        /// </summary>
+        [HttpGet("AddPlaylist")]
+        public async Task<ActionResult<PlaylistDTO>> CreatePlaylist(PlaylistDTO addplaylist)
         {
-            if (playlistDTO == null)
+            ServiceResponse response = await _playlistService.CreatePlaylist(addplaylist);
+            if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
-                return BadRequest("Invalid playlist data.");
+                return NotFound(response.Messages);
             }
-
-            var playlist = new Playlist
+            else if (response.Status == ServiceResponse.ServiceStatus.Error)
             {
-                Name = playlistDTO.Name,
-                CreatedBy = playlistDTO.CreatedBy
-            };
-
-            _context.Playlists.Add(playlist);
-            await _context.SaveChangesAsync();
-
-            playlistDTO.PlaylistID = playlist.PlaylistID; // Assign new ID
-            return CreatedAtAction(nameof(GetPlaylist), new { id = playlist.PlaylistID }, playlistDTO);
+                return StatusCode(500, response.Messages);
+            }
+            addplaylist.PlaylistID = response.CreatedId;
+            return Created($"api/Playlist/GetPlaylistById/{response.CreatedId}", addplaylist);
         }
-
-        // ✅ PUT: api/playlist/{id} - Update playlist details
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePlaylist([FromRoute] int id, [FromBody] PlaylistDTO playlistDTO)
+        /// <summary>
+        /// Updates an existing playlist's details in the system.  
+        /// It requires the playlist ID as a URL parameter and the updated `Playlist` object in the request body.  
+        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
+        /// If the playlist does not exist, an HTTP 404 Not Found response is returned.  
+        /// On successful update, the method returns an HTTP 204 No Content response.  
+        /// This ensures that modifications to playlist details are properly validated and processed.
+        /// </summary>
+        [HttpPut("UpdatePlaylist/{id}")]
+        public async Task<ActionResult> UpdatePlaylist(int id, PlaylistDTO updateplaylist)
         {
-            if (id != playlistDTO.PlaylistID)
+            if (id != updateplaylist.PlaylistID)
             {
-                return BadRequest("Playlist ID mismatch.");
+                return BadRequest();
             }
-
-            var playlist = await _context.Playlists.FindAsync(id);
-            if (playlist == null)
+            ServiceResponse response = await _playlistService.UpdatePlaylist(updateplaylist);
+            if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
-                return NotFound();
+                return NotFound(response.Messages);
             }
-
-            // Update playlist details
-            playlist.Name = playlistDTO.Name;
-            playlist.CreatedBy = playlistDTO.CreatedBy;
-
-            _context.Entry(playlist).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
+            else if (response.Status == ServiceResponse.ServiceStatus.Error)
+            {
+                return StatusCode(500, response.Messages);
+            }
             return NoContent();
         }
-
-        // ✅ DELETE: api/playlist/{id} - Delete a playlist
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlaylist([FromRoute] int id)
+        /// <summary>
+        /// Deletes a playlist from the system based on their unique ID.  
+        /// It accepts an integer `id` as a parameter and attempts to remove the corresponding playlist record.  
+        /// If the playlist exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
+        /// If the playlist does not exist, an HTTP 404 Not Found response is returned.  
+        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
+        /// This method ensures proper deletion while handling errors gracefully.
+        /// </summary>
+        [HttpDelete("DeletePlaylist/{id}")]
+        public async Task<ActionResult<Playlist>> DeletePlaylist(int id)
         {
-            var playlist = await _context.Playlists.FindAsync(id);
-            if (playlist == null)
+            ServiceResponse response = await _playlistService.DeletePlaylist(id);
+            if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
-                return NotFound();
+                return NotFound(response.Messages);
             }
-
-            _context.Playlists.Remove(playlist);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            else if (response.Status == ServiceResponse.ServiceStatus.Error)
+            {
+                return StatusCode(500, response.Messages);
+            }
+            return Ok(response.Messages);
         }
     }
 }

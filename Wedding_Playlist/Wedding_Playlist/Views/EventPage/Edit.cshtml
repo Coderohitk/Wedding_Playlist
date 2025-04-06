@@ -1,0 +1,130 @@
+@model Wedding_Playlist.Models.EventDTO
+@{
+    ViewData["Title"] = "EditEvent";
+}
+<style>
+    /* Reuse the same body background */
+    body {
+        background: #EFE5DC;
+
+    }
+
+    /* Form Container using similar styling to table-container */
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 30px;
+        border-radius: 31px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+    }
+
+    /* Form element styling */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .control-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
+        background: white;
+    }
+
+    /* Button styling matching the table actions */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #d9b497;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #B08B6F;
+        color: white;
+    }
+
+    .btn:hover {
+        background-color: #B08B6F;
+        color: white;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    h2 {
+        color: #000;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+</style>
+
+<div class="custom-container">
+    <div class="custom-card">
+        <div class="card-header">
+            <h2>Edit Event</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditEvent" method="post">
+                <input type="hidden" asp-for="EventId" />
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Date"></label>
+                    <input asp-for="Date" type="date" class="form-control" required />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Location"></label>
+                    <input asp-for="Location" class="form-control" required />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a asp-action="ListEvent" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
