@@ -16,7 +16,16 @@ namespace WeddingPlaylist.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/song - Retrieve all songs
+        /// <summary>
+        /// Gets all songs.
+        /// Returns
+        /// List of SongDTO objects.
+        /// This method is an asynchronous operation that calls the database to fetch all songs.  
+        /// It then maps each song to a SongDTO object and returns the list as an ActionResult.  
+        /// If there are no songs, it returns an empty list.  
+        /// This method is marked as a GET request and has no parameters.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SongDTO>>> GetSongs()
         {
@@ -34,7 +43,18 @@ namespace WeddingPlaylist.Controllers
             return Ok(songs);
         }
 
-        // ✅ GET: api/song/{id} - Retrieve a song by ID
+        /// <summary>
+        /// Gets a specific song by ID.
+        /// Returns
+        /// An SongDTO object if found; otherwise, 404 NotFound.
+        /// This method takes an integer `id` as a parameter and queries the database for a song with the matching ID.  
+        /// If a song is found, it returns an HTTP 200 response with the song details.  
+        /// If no song matches the provided ID, it returns an HTTP 404 Not Found response.  
+        /// This helps ensure that only valid songs are accessed in the system.  
+        /// The method is useful for retrieving song details in a detailed view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<SongDTO>> GetSong([FromRoute] int id)
         {
@@ -56,7 +76,13 @@ namespace WeddingPlaylist.Controllers
             return Ok(songDTO);
         }
 
-        // ✅ POST: api/song - Create a new song
+        /// <summary>
+        /// Adds a new song to the database.
+        /// Returns
+        /// Status with CreatedId or error message.
+        /// </summary>
+        /// <param name="songDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<SongDTO>> CreateSong([FromBody] SongDTO songDTO)
         {
@@ -80,7 +106,20 @@ namespace WeddingPlaylist.Controllers
             return CreatedAtAction(nameof(GetSong), new { id = song.SongId }, songDTO);
         }
 
-        // ✅ PUT: api/song/{id} - Update song details
+        /// <summary>
+        /// Updates an existing song in the database.
+        /// Returns
+        /// Status with error message if not found.
+        /// This method takes an integer `id` as a parameter and an updated `SongDTO` object in the request body.  
+        /// It then updates the song in the database with the new details.  
+        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
+        /// If the song does not exist, an HTTP 404 Not Found response is returned.  
+        /// On successful update, the method returns an HTTP 204 No Content response.  
+        /// This ensures that modifications to songs are properly validated and processed.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="songDTO"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSong([FromRoute] int id, [FromBody] SongDTO songDTO)
         {
@@ -107,7 +146,18 @@ namespace WeddingPlaylist.Controllers
             return NoContent();
         }
 
-        // ✅ DELETE: api/song/{id} - Delete a song
+        /// <summary>
+        /// Deletes a song from the database.
+        /// Returns
+        /// Status with error message if not found.  
+        /// This method takes an integer `id` as a parameter and attempts to remove the corresponding song record.  
+        /// If the song exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
+        /// If the song does not exist, an HTTP 404 Not Found response is returned.  
+        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
+        /// This method ensures proper deletion while handling errors gracefully.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSong([FromRoute] int id)
         {
