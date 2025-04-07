@@ -44,7 +44,6 @@ Welcome to the **Wedding Playlist** project! This web application is built using
 ```bash
 git clone https://github.com/Coderohitk/Wedding_Playlist.git
 ```
-````
 
 #### 2. Navigate to the project folder
 
