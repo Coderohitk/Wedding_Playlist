@@ -1,4 +1,4 @@
-````markdown
+
 # 🎶 Wedding Playlist - Song & Playlist Module
 
 Welcome to the **Wedding Playlist** project! This web application is built using **ASP.NET Core MVC** and **Entity Framework Core**. It helps users manage songs, playlists, and their associations with events and guest requests—perfect for weddings, parties, or any event with a personalized playlist.
@@ -42,7 +42,7 @@ Welcome to the **Wedding Playlist** project! This web application is built using
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/milestone-manager.git
+git clone https://github.com/Coderohitk/Wedding_Playlist.git
 ```
 ````
 
@@ -155,10 +155,7 @@ Please follow existing code styles and write unit tests for any new features.
 
 ---
 
-## 🛡️ License
-
-This project is licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for full details.
+or full details.
 
 ---
 
@@ -166,9 +163,6 @@ See the [LICENSE](LICENSE) file for full details.
 
 Created by **Sarrah Gandhi**
 Created by **Rohit Kumar**
-
-- 💼 [LinkedIn](https://www.linkedin.com/in/sarrahgandhi)
-- 📧 sarrah@example.com
 
 ---
 
