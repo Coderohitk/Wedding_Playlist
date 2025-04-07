@@ -145,17 +145,23 @@ MilestoneManager/
 
 ## 👥 Team Members & Responsibilities
 
-| Name              | Role              | Responsibilities                                         |
-|-------------------|-------------------|----------------------------------------------------------|
-| **Sarrah Gandhi** | Backend + Frontend| - Event & Guest API  
-                                                  - Event and Guest Controllers & Pages  
-                                                  - CSS Styling
-|
-| **Rohit**         | Backend + Frontend| - Song & Playlist API  
-                                                  - Song and Playlist Controllers & Views
-                                                  - User Testing
-|
+### 🎸 Sarrah Gandhi
+- Developed **Event** and **Guest** models, controllers, views, and API endpoints.
+- Implemented **Guest/Event** many-to-many relationship via `EventGuest`.
+- Styled all related **views and partials** using Razor and Bootstrap.
+- Worked on **authentication/authorization** using Individual Accounts (Admin roles).
+- Contributed to **overall page layouts and CSS styling**.
+- Integrated song requests by guests using the `GuestSongRequest` table.
 
+### 🎧 Rohit Kumar
+- Developed **Song** and **Playlist** models, services, and controllers.
+- Built **SongPageController** for full CRUD functionality.
+- Implemented **many-to-many relationships**:  
+  - `EventSong` (Events ↔ Songs)  
+  - `PlaylistSong` (Playlists ↔ Songs)
+- Created views for **List, Create, Edit, Delete** songs.
+- Handled **data seeding** and sample entries for testing.
+- Wrote **LINQ queries** for related entity display in views.
 ```
 
 Please follow existing code styles and write unit tests for any new features.
