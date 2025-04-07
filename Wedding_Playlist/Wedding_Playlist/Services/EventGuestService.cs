@@ -2,7 +2,7 @@ using Wedding_Playlist.Models;
 using Wedding_Playlist.Data;
 using Wedding_Playlist.Interfaces;
 using Microsoft.EntityFrameworkCore;
-namespace CoreEntityFramework.Services
+namespace Wedding_Playlist.Services
 {
     public class EventGuestService : IEventGuestService
     {
