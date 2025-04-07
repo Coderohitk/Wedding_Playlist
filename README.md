@@ -144,10 +144,12 @@ MilestoneManager/
 
 ---
 
-## 🤝 Contributions
+## 👥 Team Members & Responsibilities
 
-Songs and Playlists: Rohit Kumar
-Events and Guests: Sarrah Gandhi
+| Name              | Role              | Responsibilities                                                                 |
+|-------------------|-------------------|----------------------------------------------------------------------------------|
+| **Sarrah Gandhi** | Backend + Frontend| 🔹 Event & Guest API<br>🔹 Event and Guest Controllers & Pages<br>🔹 CSS Styling<br>🔹 README |
+| **Rohit**         | Backend + Frontend| 🔹 Song & Playlist API<br>🔹 Song and Playlist Controllers & Views  <br>🔹 User Testing          |
 
 ```
 
