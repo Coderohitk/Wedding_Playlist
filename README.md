@@ -146,10 +146,16 @@ MilestoneManager/
 
 ## 👥 Team Members & Responsibilities
 
-| Name              | Role              | Responsibilities                                                                 |
-|-------------------|-------------------|----------------------------------------------------------------------------------|
-| **Sarrah Gandhi** | Backend + Frontend| 🔹 Event & Guest API<br>🔹 Event and Guest Controllers & Pages<br>🔹 CSS Styling<br>🔹 README |
-| **Rohit**         | Backend + Frontend| 🔹 Song & Playlist API<br>🔹 Song and Playlist Controllers & Views  <br>🔹 User Testing          |
+| Name              | Role              | Responsibilities                                         |
+|-------------------|-------------------|----------------------------------------------------------|
+| **Sarrah Gandhi** | Backend + Frontend| - Event & Guest API  
+                                                  - Event and Guest Controllers & Pages  
+                                                  - CSS Styling
+|
+| **Rohit**         | Backend + Frontend| - Song & Playlist API  
+                                                  - Song and Playlist Controllers & Views
+                                                  - User Testing
+|
 
 ```
 
