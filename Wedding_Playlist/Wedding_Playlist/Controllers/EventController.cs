@@ -18,21 +18,36 @@ namespace Wedding_Playlist.Controllers
             _eventService = eventService;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<EventDTO>>> GetEvents()
         {
-            IEnumerable<Event> events = await _eventService.GetEvents();
-            return Ok(events);
+            var events = await _eventService.GetEvents();
+            var eventDTOs = events.Select(e => new EventDTO
+            {
+                EventId = e.EventId,
+                Name = e.Name,
+                Date = e.Date,
+                Location = e.Location
+            });
+
+            return Ok(eventDTOs);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEventsById(int id)
+        public async Task<ActionResult<EventDTO>> GetEventsById(int id)
         {
-            var eventDTO = await _eventService.GetEventById(id);
-            if (eventDTO == null)
+            var e = await _eventService.GetEventById(id);
+            if (e == null) return NotFound();
+
+            var eventDTO = new EventDTO
             {
-                return NotFound();
-            }
+                EventId = e.EventId,
+                Name = e.Name,
+                Date = e.Date,
+                Location = e.Location
+            };
+
             return Ok(eventDTO);
         }
+
         [HttpPost]
         public async Task<ActionResult<EventDTO>> AddEvent(EventDTO eventDTO)
         {

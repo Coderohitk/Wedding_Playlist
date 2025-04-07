@@ -17,6 +17,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         // GET: api/PlaylistSong [HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylistSongs()
         {
             var playlistSongs = await _context.PlaylistSongs

@@ -22,11 +22,21 @@ namespace MilestoneManager.Controllers
         /// This method does not require any parameters.
         /// </summary>
         [HttpGet("Guest")]
-        public async Task<ActionResult<IEnumerable<Guest>>> GetGuest()
+        public async Task<ActionResult<IEnumerable<GuestDTO>>> GetGuest()
         {
-            IEnumerable<Guest> guest = await _guestService.GetGuests();
-            return Ok(guest);
+            var guests = await _guestService.GetGuests();
+            var guestDTOs = guests.Select(g => new GuestDTO
+            {
+                GuestId = g.GuestId,
+                Name = g.Name,
+                Email = g.Email,
+                RSVP_Status = g.RSVP_Status,
+                Side = g.Side
+            });
+
+            return Ok(guestDTOs);
         }
+
 
         /// <summary>
         /// Fetches a specific guest by their unique ID.  
@@ -37,18 +47,23 @@ namespace MilestoneManager.Controllers
         /// The method is useful for retrieving guest details in a detailed view.
         /// </summary>
         [HttpGet("GetGuestById")]
-        public async Task<ActionResult<Guest>> FindGuest(int id)
+        public async Task<ActionResult<GuestDTO>> FindGuest(int id)
         {
             var guest = await _guestService.GetGuestById(id);
-            if (guest == null)
+            if (guest == null) return NotFound();
+
+            var guestDTO = new GuestDTO
             {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(guest);
-            }
+                GuestId = guest.GuestId,
+                Name = guest.Name,
+                Email = guest.Email,
+                RSVP_Status = guest.RSVP_Status,
+                Side = guest.Side
+            };
+
+            return Ok(guestDTO);
         }
+
 
         /// <summary>
         /// Updates an existing guest's details in the system.  
