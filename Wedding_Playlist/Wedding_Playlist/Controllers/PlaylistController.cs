@@ -22,11 +22,19 @@ namespace Wedding_Playlist.Controllers
         /// This method does not require any parameters.
         /// </summary>
         [HttpGet("Playlist")]
-        public async Task<ActionResult<IEnumerable<Playlist>>> GetAllPlaylists()
+        public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylists()
         {
-            IEnumerable<Playlist> playlist = await _playlistService.GetAllPlaylists();
-            return Ok(playlist);
+            var playlists = await _playlistService.GetAllPlaylists();
+            var playlistDTOs = playlists.Select(p => new PlaylistDTO
+            {
+                PlaylistID = p.PlaylistID,
+                Name = p.Name,
+                CreatedBy = p.CreatedBy
+            });
+
+            return Ok(playlistDTOs);
         }
+
         /// <summary>
         /// Fetches a specific playlist by their unique ID.  
         /// The method takes an integer `id` as a parameter and queries the service for a matching playlist.  
@@ -36,18 +44,21 @@ namespace Wedding_Playlist.Controllers
         /// The method is useful for retrieving playlist details in a detailed view.
         /// </summary>
         [HttpGet("GetPlaylistById")]
-        public async Task<ActionResult<Playlist>> GetPlaylist(int id)
+        public async Task<ActionResult<PlaylistDTO>> GetPlaylist(int id)
         {
-            var playlist = await _playlistService.GetPlaylist(id);
-            if (playlist == null)
+            var p = await _playlistService.GetPlaylist(id);
+            if (p == null) return NotFound();
+
+            var playlistDTO = new PlaylistDTO
             {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(playlist);
-            }
+                PlaylistID = p.PlaylistID,
+                Name = p.Name,
+                CreatedBy = p.CreatedBy
+            };
+
+            return Ok(playlistDTO);
         }
+
         /// <summary>
         /// Retrieves a list of playlists based on their assigned category.  
         /// The method takes a `PlaylistCategory` enum as a parameter to filter playlists accordingly.  
@@ -106,9 +117,9 @@ namespace Wedding_Playlist.Controllers
         /// This method ensures proper deletion while handling errors gracefully.
         /// </summary>
         [HttpDelete("DeletePlaylist/{id}")]
-        public async Task<ActionResult<Playlist>> DeletePlaylist(int id)
+        public async Task<IActionResult> DeletePlaylist(int id)
         {
-            ServiceResponse response = await _playlistService.DeletePlaylist(id);
+            var response = await _playlistService.DeletePlaylist(id);
             if (response.Status == ServiceResponse.ServiceStatus.NotFound)
             {
                 return NotFound(response.Messages);
@@ -119,5 +130,6 @@ namespace Wedding_Playlist.Controllers
             }
             return Ok(response.Messages);
         }
+
     }
 }

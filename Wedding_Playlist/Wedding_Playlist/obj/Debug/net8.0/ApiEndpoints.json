@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.Event, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.EventDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -92,7 +92,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Wedding_Playlist.Models.Event",
+        "Type": "Wedding_Playlist.Models.EventDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -299,7 +299,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Wedding_Playlist.Models.Guest",
+        "Type": "Wedding_Playlist.Models.GuestDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -319,7 +319,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.Guest, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.GuestDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -519,17 +519,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Wedding_Playlist.Models.Playlist",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Wedding_Playlist.Controllers.PlaylistAPIController",
@@ -547,7 +537,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Wedding_Playlist.Models.Playlist",
+        "Type": "Wedding_Playlist.Models.PlaylistDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -567,7 +557,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.Playlist, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.PlaylistDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -602,7 +592,7 @@
     "ContainingType": "Wedding_Playlist.Controllers.PlaylistSongController",
     "Method": "GetAllPlaylistSongs",
     "RelativePath": "api/PlaylistSong",
-    "HttpMethod": "",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
