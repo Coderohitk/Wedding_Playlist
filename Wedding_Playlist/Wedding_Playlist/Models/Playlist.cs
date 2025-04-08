@@ -16,4 +16,9 @@ namespace Wedding_Playlist.Models
         public string Name { get; set; }
         public string CreatedBy { get; set; }
     }
+    public class PlaylistDetailsViewModel
+    {
+        public PlaylistDTO Playlist { get; set; }
+        public List<SongDTO> Songs { get; set; } = new List<SongDTO>();
+    }
 }
