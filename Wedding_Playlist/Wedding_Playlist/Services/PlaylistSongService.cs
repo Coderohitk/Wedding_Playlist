@@ -2,8 +2,7 @@ using Wedding_Playlist.Models;
 using Wedding_Playlist.Data;
 using Wedding_Playlist.Interfaces;
 using Microsoft.EntityFrameworkCore;
-namespace Wedding_Playlist.Services
-
+namespace CoreEntityFramework.Services
 {
     public class PlaylistSongService : IPlaylistSongService
     {
@@ -29,6 +28,17 @@ namespace Wedding_Playlist.Services
             }
             return playlistSongList;
         }
+
+        public async Task<IEnumerable<PlaylistSong>> GetPlaylistSongsByPlaylistId(int playlistId)
+        {
+            List<PlaylistSong> playlistSongs = await _context.PlaylistSongs
+                .Where(ps => ps.PlaylistID == playlistId)
+                .Include(ps => ps.Song)
+                .ToListAsync();
+
+            return playlistSongs;
+        }
+
         public async Task<PlaylistSong> GetPlaylistSong(int id)
         {
             var playlistSong = await _context.PlaylistSongs.FindAsync(id);

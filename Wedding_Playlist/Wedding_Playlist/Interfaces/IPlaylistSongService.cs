@@ -6,6 +6,7 @@ namespace Wedding_Playlist.Interfaces
     {
         Task<IEnumerable<PlaylistSong>> GetAllPlaylistSongs();
         Task<PlaylistSong> GetPlaylistSong(int id);
+        Task<IEnumerable<PlaylistSong>> GetPlaylistSongsByPlaylistId(int playlistId);
         Task<ServiceResponse> CreatePlaylistSong(PlaylistSongDTO playlistSongDTO);
         Task<ServiceResponse> UpdatePlaylistSong(PlaylistSongDTO playlistSongDTO);
         Task<ServiceResponse> DeletePlaylistSong(int id);

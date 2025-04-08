@@ -3,7 +3,7 @@ using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
 using Microsoft.EntityFrameworkCore;
 using Wedding_Playlist.Interfaces;
-namespace Wedding_Playlist.Services
+namespace CoreEntityFramework.Services
 
 {
     public class PlaylistService : IPlaylistService

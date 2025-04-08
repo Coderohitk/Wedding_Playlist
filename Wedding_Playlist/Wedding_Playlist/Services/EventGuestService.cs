@@ -2,7 +2,7 @@ using Wedding_Playlist.Models;
 using Wedding_Playlist.Data;
 using Wedding_Playlist.Interfaces;
 using Microsoft.EntityFrameworkCore;
-namespace Wedding_Playlist.Services
+namespace CoreEntityFramework.Services
 {
     public class EventGuestService : IEventGuestService
     {
@@ -47,6 +47,49 @@ namespace Wedding_Playlist.Services
             };
             return eventGuestDTO;
         }
+        public async Task<List<EventGuest>> GetEventGuestsbyEventId(int id)
+        {
+            var eventguest = await _context.EventGuests.Where(x => x.EventId == id).ToListAsync();
+            if (eventguest == null)
+            {
+                return null;
+            }
+            List<EventGuest> eventGuestList = new List<EventGuest>();
+            foreach (var eventGuest in eventguest)
+            {
+                eventGuestList.Add(new EventGuest()
+                {
+                    EventGuestId = eventGuest.EventGuestId,
+                    EventId = eventGuest.EventId,
+                    GuestId = eventGuest.GuestId,
+
+
+                });
+            }
+            return eventGuestList;
+        }
+        public async Task<List<EventGuest>> GetEventGuestsbyGuestId(int id)
+        {
+            var eventguest = await _context.EventGuests.Where(x => x.GuestId == id).ToListAsync();
+            if (eventguest == null)
+            {
+                return null;
+            }
+            List<EventGuest> eventGuestList = new List<EventGuest>();
+            foreach (var eventGuest in eventguest)
+            {
+                eventGuestList.Add(new EventGuest()
+                {
+                    EventGuestId = eventGuest.EventGuestId,
+                    EventId = eventGuest.EventId,
+                    GuestId = eventGuest.GuestId,
+
+
+                });
+            }
+            return eventGuestList;
+        }
+
         public async Task<ServiceResponse> AddEventGuest(EventGuestDTO eventGuestDTO)
         {
             ServiceResponse serviceResponse = new ServiceResponse();
