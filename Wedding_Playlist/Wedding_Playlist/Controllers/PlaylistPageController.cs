@@ -4,15 +4,19 @@ using Wedding_Playlist.Models;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-namespace MilestoneManager.Controllers
+namespace Wedding_Playlist.Controllers
 {
     public class PlaylistPageController : Controller
     {
         private readonly IPlaylistService _playlistService;
+        private readonly IPlaylistSongService _playlistSongService;
+        private readonly ISongService _songService;
 
-        public PlaylistPageController(IPlaylistService playlistService)
+        public PlaylistPageController(IPlaylistService playlistService, IPlaylistSongService playlistSongService, ISongService songService)
         {
             _playlistService = playlistService;
+            _playlistSongService = playlistSongService;
+            _songService = songService;
         }
         public IActionResult Index()
         {
@@ -33,8 +37,34 @@ namespace MilestoneManager.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var playlist = await _playlistService.GetPlaylist(id);
-            ViewData["PlaylistName"] = playlist.Name;
-            return View();
+            if (playlist == null)
+            {
+                return NotFound();
+            }
+
+            // Get all playlist songs along with their song details
+            var playlistSongs = await _playlistSongService.GetPlaylistSongsByPlaylistId(id);
+
+            // Create view model with playlist info and songs
+            var viewModel = new PlaylistDetailsViewModel
+            {
+                Playlist = new PlaylistDTO
+                {
+                    PlaylistID = playlist.PlaylistID,
+                    Name = playlist.Name,
+                    CreatedBy = playlist.CreatedBy
+                },
+                Songs = playlistSongs.Select(ps => new SongDTO
+                {
+                    SongId = ps.Song.SongId,
+                    Title = ps.Song.Title,
+                    Artist = ps.Song.Artist,
+                    Genre = ps.Song.Genre,
+                    Description = ps.Song.Description
+                }).ToList()
+            };
+
+            return View(viewModel);
         }
         [HttpGet]
         public async Task<IActionResult> Create()

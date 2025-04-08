@@ -21,7 +21,6 @@ namespace Wedding_Playlist.Controllers
         /// If there are no guests, it still returns an empty list rather than an error.  
         /// This method does not require any parameters.
         /// </summary>
-        /// <returns></returns>
         [HttpGet("Guest")]
         public async Task<ActionResult<IEnumerable<GuestDTO>>> GetGuest()
         {

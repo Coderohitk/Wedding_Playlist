@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
+using Wedding_Playlist.Interfaces;
 
 namespace Wedding_Playlist.Controllers
 {
@@ -10,22 +11,15 @@ namespace Wedding_Playlist.Controllers
     public class GuestSongRequestController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGuestSongRequestService _guestSongRequestService;
 
-        public GuestSongRequestController(ApplicationDbContext context)
+        public GuestSongRequestController(ApplicationDbContext context, IGuestSongRequestService guestSongRequestService)
         {
             _context = context;
+            _guestSongRequestService = guestSongRequestService;
         }
 
-        /// <summary>
-        /// Gets all guest song requests.
-        /// Returns
-        /// List of GuestSongRequestDTO objects.
-        /// This method is an asynchronous operation that calls the database to fetch all guest song requests.  
-        /// It then maps each guest song request to a GuestSongRequestDTO object and returns the list as an ActionResult.  
-        /// If there are no guest song requests, it returns an empty list.  
-        /// This method is marked as a GET request and has no parameters.
-        /// </summary>
-        /// <returns></returns>
+        // GET: api/GuestSongRequest
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GuestSongRequestDTO>>> GetAllGuestSongRequests()
         {
@@ -41,18 +35,7 @@ namespace Wedding_Playlist.Controllers
             return Ok(guestSongRequests);
         }
 
-        /// <summary>
-        /// Gets a specific guest song request by ID.
-        /// Returns
-        /// An GuestSongRequestDTO object if found; otherwise, 404 NotFound.
-        /// This method takes an integer `id` as a parameter and queries the database for a guest song request with the matching ID.  
-        /// If a guest song request is found, it returns an HTTP 200 response with the guest song request details.  
-        /// If no guest song request matches the provided ID, it returns an HTTP 404 Not Found response.  
-        /// This helps ensure that only valid guest song requests are accessed in the system.  
-        /// The method is useful for retrieving guest song request details in a detailed view.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        // GET: api/GuestSongRequest/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> GetGuestSongRequest(int id)
         {
@@ -72,17 +55,21 @@ namespace Wedding_Playlist.Controllers
             };
             return Ok(guestSongRequestDTO);
         }
-        /// <summary>
-        /// Adds a new guest song request to the database.
-        /// Returns
-        /// Status with CreatedId or error message.
-        /// This method takes a `GuestSongRequestDTO` object as a parameter and creates a new guest song request in the database.  
-        /// It then maps the new guest song request to a `GuestSongRequestDTO` object and returns the created ID as an ActionResult.  
-        /// If the guest song request creation fails, it returns an HTTP 500 Internal Server Error response.  
-        /// This method is marked as a POST request and has a [FromBody] attribute, which tells the controller to bind the request body to the `GuestSongRequestDTO` object.
-        /// </summary>
-        /// <param name="guestSongRequestDTO"></param>
-        /// <returns></returns>
+
+        // GET: api/GuestSongRequest/details/5
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetGuestSongRequestById(int id)
+        {
+            var response = await _guestSongRequestService.GetGuestSongRequestById(id);
+
+            if (!response.Success)
+            {
+                return NotFound(new { message = response.Messages.FirstOrDefault() });
+            }
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<ActionResult<GuestSongRequestDTO>> CreateGuestSongRequest([FromBody] GuestSongRequestDTO guestSongRequestDTO)
         {
@@ -103,20 +90,6 @@ namespace Wedding_Playlist.Controllers
             guestSongRequestDTO.RequestID = newGuestSongRequest.RequestID;
             return CreatedAtAction(nameof(GetGuestSongRequest), new { id = newGuestSongRequest.RequestID }, guestSongRequestDTO);
         }
-        /// <summary>
-        /// Updates an existing guest song request in the database.
-        /// Returns
-        /// Status with error message if not found.
-        /// This method takes an integer `id` as a parameter and an updated `GuestSongRequestDTO` object in the request body.  
-        /// It then updates the guest song request in the database with the new details.  
-        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
-        /// If the guest song request does not exist, an HTTP 404 Not Found response is returned.  
-        /// On successful update, the method returns an HTTP 204 No Content response.  
-        /// This ensures that modifications to guest song requests are properly validated and processed.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="guestSongRequestDTO"></param>
-        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> UpdateGuestSongRequest([FromRoute] int id, [FromBody] GuestSongRequestDTO guestSongRequestDTO)
         {
@@ -124,33 +97,22 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
-            var guestSongRequestToUpdate = await _context.GuestSongRequests.FindAsync(id);
-            if (guestSongRequestToUpdate == null)
+
+            var response = await _guestSongRequestService.UpdateGuestSongRequest(guestSongRequestDTO);
+
+            if (response.Status == ServiceResponse.ServiceStatus.Error)
             {
                 return NotFound();
             }
 
-            guestSongRequestToUpdate.EventID = guestSongRequestDTO.EventID;
-            guestSongRequestToUpdate.GuestID = guestSongRequestDTO.GuestID;
-            guestSongRequestToUpdate.SongID = guestSongRequestDTO.SongID;
-            guestSongRequestToUpdate.Status = guestSongRequestDTO.Status;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(guestSongRequestToUpdate);
+            // Return messages that include information about the EventSong addition
+            return Ok(new
+            {
+                Status = response.Status,
+                Messages = response.Messages,
+                GuestSongRequest = guestSongRequestDTO
+            });
         }
-        /// <summary>
-        /// Deletes a guest song request from the database.
-        /// Returns
-        /// Status with error message if not found.  
-        /// This method takes an integer `id` as a parameter and attempts to remove the corresponding guest song request record.  
-        /// If the guest song request exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
-        /// If the guest song request does not exist, an HTTP 404 Not Found response is returned.  
-        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
-        /// This method ensures proper deletion while handling errors gracefully.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> DeleteGuestSongRequest([FromRoute] int id)
         {

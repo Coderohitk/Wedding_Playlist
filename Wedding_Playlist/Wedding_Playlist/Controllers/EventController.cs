@@ -17,10 +17,6 @@ namespace Wedding_Playlist.Controllers
         {
             _eventService = eventService;
         }
-        /// <summary>
-        /// Gets all wedding events.
-        /// </summary>
-        /// <returns>List of EventDTO objects.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventDTO>>> GetEvents()
         {
@@ -35,12 +31,6 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(eventDTOs);
         }
-        /// <summary>
-        /// Gets a specific event by ID.
-        /// </summary>
-        /// <param name="id">The ID of the event.</param>
-        /// <returns>An EventDTO object if found; otherwise, 404 NotFound.</returns>
-
         [HttpGet("{id}")]
         public async Task<ActionResult<EventDTO>> GetEventsById(int id)
         {
@@ -57,11 +47,7 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(eventDTO);
         }
-        /// <summary>
-        /// Adds a new event to the database.
-        /// </summary>
-        /// <param name="eventDTO">The event data to add.</param>
-        /// <returns>Status with CreatedId or error message.</returns>
+
         [HttpPost]
         public async Task<ActionResult<EventDTO>> AddEvent(EventDTO eventDTO)
         {
@@ -76,12 +62,6 @@ namespace Wedding_Playlist.Controllers
             }
             return Ok(response.CreatedId);
         }
-        /// <summary>
-        /// Updates an event in the database.
-        /// </summary>
-        /// <param name="id">The ID of the event to update.</param>
-        /// <param name="eventDTO">The updated event data.</param>
-        /// <returns>Status with error message if not found.</returns>
         [HttpPut]
         public async Task<ActionResult<ServiceResponse>> UpdateEvent(int id, EventDTO eventDTO)
         {
@@ -100,11 +80,6 @@ namespace Wedding_Playlist.Controllers
             }
             return Ok(response);
         }
-        /// <summary>
-        /// Deletes an event from the database.
-        /// </summary>
-        /// <param name="id">The ID of the event to delete.</param>
-        /// <returns>Status with error message if not found.</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ServiceResponse>> DeleteEvent(int id)
         {
