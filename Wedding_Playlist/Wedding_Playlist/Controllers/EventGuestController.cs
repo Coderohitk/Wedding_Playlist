@@ -16,12 +16,7 @@ namespace Wedding_Playlist.Controllers
             _context = context;
         }
 
-        ///Summary
-        /// Gets all event guests.
-        ///Returns
-        /// List of EventGuestDTO objects.
-        /// </summary>
-
+        // GET: api/EventGuest
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventGuestDTO>>> GetAllEventGuests()
         {
@@ -35,13 +30,7 @@ namespace Wedding_Playlist.Controllers
             return Ok(eventGuests);
         }
 
-        /// <summary>
-        ///  Gets a specific event guest by ID.
-        ///     Returns
-        ///     An EventGuestDTO object if found; otherwise, 404 NotFound.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        // GET: api/EventGuest/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventGuestDTO>> GetEventGuest(int id)
         {
@@ -59,13 +48,26 @@ namespace Wedding_Playlist.Controllers
             };
             return Ok(eventGuestDTO);
         }
-        /// <summary>
-        /// Adds a new event guest to the database.
-        /// Returns
-        /// Status with CreatedId or error message.
-        /// <param name="eventGuestDTO"></param>
-        /// <returns></returns>
-        /// </summary>
+        public async Task<ActionResult<List<EventGuestDTO>>> GetEventGuestByEventID(int id)
+        {
+            var eventGuests = await _context.EventGuests.Where(x => x.EventId == id).ToListAsync();
+            if (eventGuests == null)
+            {
+                return NotFound();
+            }
+            var eventGuestDTO = new List<EventGuestDTO>();
+            foreach (var eventGuest in eventGuests)
+            {
+                var eventguestlist = new EventGuestDTO
+                {
+                    EventGuestId = eventGuest.EventGuestId,
+                    EventId = eventGuest.EventId,
+                    GuestId = eventGuest.GuestId
+                };
+                eventGuestDTO.Add(eventguestlist);
+            }
+            return Ok(eventGuestDTO);
+        }
         [HttpPost]
         public async Task<ActionResult<EventGuestDTO>> CreateEventGuest([FromBody] EventGuestDTO eventGuestDTO)
         {
@@ -84,14 +86,6 @@ namespace Wedding_Playlist.Controllers
             eventGuestDTO.EventGuestId = newEventGuest.EventGuestId;
             return CreatedAtAction(nameof(GetEventGuest), new { id = newEventGuest.EventGuestId }, eventGuestDTO);
         }
-        /// <summary>
-        ///     Updates an event guest in the database.
-        ///     Returns
-        ///     Status with error message if not found.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="eventGuestDTO"></param>
-        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult<EventGuestDTO>> UpdateEventGuest([FromRoute] int id, [FromBody] EventGuestDTO eventGuestDTO)
         {
@@ -112,13 +106,6 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(eventGuestToUpdate);
         }
-        /// <summary>
-        /// Deletes an event guest from the database.
-        /// Returns
-        /// Status with error message if not found.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<EventGuestDTO>> DeleteEventGuest([FromRoute] int id)
         {
