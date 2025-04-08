@@ -31,6 +31,7 @@
                     <td class="action-icons">
                         <a asp-action="Edit" asp-route-id="@item.GuestId">✏️</a>
                         <a asp-action="Delete" asp-route-id="@item.GuestId">🗑</a>
+                        <a asp-action="Details" asp-route-id="@item.GuestId">Details</a>
                     </td>
                 </tr>
             }
@@ -70,9 +71,9 @@
         background-color: #d9b497;
     }
 
-        .btn:hover {
-            background-color: #B08B6F;
-        }
+    .btn:hover {
+        background-color: #B08B6F;
+    }
 
     .styled-table thead th {
         color: rgb(0, 0, 0);
@@ -104,29 +105,29 @@
         border-bottom: none;
     }
 
-        .styled-table tbody tr:last-child td:first-child {
-            border-bottom-left-radius: 31px;
-        }
+    .styled-table tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 31px;
+    }
 
-        .styled-table tbody tr:last-child td:last-child {
-            border-bottom-right-radius: 31px;
-        }
+    .styled-table tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 31px;
+    }
 
     .action-icons {
         display: flex;
         gap: 8px;
     }
 
-        .action-icons a {
-            text-decoration: none;
-            color: white;
-            background: #B08B6F;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
+    .action-icons a {
+        text-decoration: none;
+        color: white;
+        background: #B08B6F;
+        padding: 5px 10px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
 
-            .action-icons a:hover {
-                background: #DFC3AE;
-            }
+    .action-icons a:hover {
+        background: #DFC3AE;
+    }
 </style>

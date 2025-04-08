@@ -1,12 +1,11 @@
 @model IEnumerable<Wedding_Playlist.Models.EventDTO>
 @{
-    ViewData["Title"] = "Index";
-
+    ViewData["Title"] = "Events";
 }
-<h1 class="page-title">List Events</h1>
+<h1 class="page-title">Events</h1>
 
 <div class="button-container">
-    <a asp-action="Create" class="btn">Create New Event</a>
+    <a asp-action="Create" class="btn btn-primary">Create New Event</a>
 </div>
 
 <div class="table-container">
@@ -22,133 +21,17 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class>
+                <tr>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                    <td>@item.Date.ToString("MMM dd, yyyy")</td>
                     <td>@Html.DisplayFor(modelItem => item.Location)</td>
-
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.EventId" class="btn btn-mushroom">✏️</a>
-                        <a asp-action="Delete" asp-route-id="@item.EventId" class="btn btn-blush">🗑</a>
-
+                    <td class="action-icons">
+                        <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.EventId">Details</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-</div>
-
-
-<style>
-    body {
-        background: #EFE5DC;
-
-    }
-
-    /* Table Container */
-    .table-container {
-        width: 100%;
-        max-width: 1000px;
-        /* Adjust width as needed */
-        margin: auto;
-        padding: 0px;
-        border-radius: 31px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        /* Ensures border-radius applies properly */
-    }
-
-    /* Table Styling */
-    .styled-table {
-        width: 100%;
-        border-collapse: separate;
-        /* Prevents collapsing, allowing border-radius */
-        border-spacing: 0;
-        /* Removes extra space between thead & tbody */
-        border-radius: 31px;
-        overflow: hidden;
-        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
-        opacity: 50;
-        padding: 5px;
-        font-size: 12px;
-
-
-    }
-
-    .btn {
-        padding: 10px;
-        background-color: #d9b497;
-
-    }
-
-    .btn:hover {
-        background-color: #B08B6F;
-    }
-
-
-
-    /* Table Header */
-    .styled-table thead th {
-        color: rgb(0, 0, 0);
-        padding: 12px;
-        text-align: left;
-        font-weight: bold;
-    }
-
-    /* Ensuring thead corners are rounded */
-    .styled-table thead tr:first-child th:first-child {
-        border-top-left-radius: 31px;
-    }
-
-    .styled-table thead tr:first-child th:last-child {
-        border-top-right-radius: 31px;
-
-    }
-
-
-    .styled-table tbody tr:hover {
-        background: linear-gradient(to right, #fff7ef, #ebdbce);
-        transition: 0.3s;
-    }
-
-    /* Cell Styling */
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    }
-
-    /* Remove bottom border from the last row */
-    .styled-table tbody tr:last-child td {
-        border-bottom: none;
-    }
-
-    /* Ensuring tbody corners are rounded */
-    .styled-table tbody tr:last-child td:first-child {
-        border-bottom-left-radius: 31px;
-    }
-
-    .styled-table tbody tr:last-child td:last-child {
-        border-bottom-right-radius: 31px;
-    }
-
-    /* Edit & Delete Button Styling */
-    .action-icons {
-        display: flex;
-        gap: 8px;
-    }
-
-    .action-icons a {
-        text-decoration: none;
-        color: white;
-        background: #B08B6F;
-        padding: 5px 10px;
-        border-radius: 8px;
-        transition: 0.3s;
-    }
-
-    .action-icons a:hover {
-        background: #DFC3AE;
-    }
-</style>

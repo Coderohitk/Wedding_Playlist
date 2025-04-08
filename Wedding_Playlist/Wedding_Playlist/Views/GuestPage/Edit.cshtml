@@ -1,6 +1,8 @@
 ﻿@model Wedding_Playlist.Models.GuestDTO
 @{
     ViewData["Title"] = "Edit Guest";
+    var allEvents = ViewData["AllEvents"] as IEnumerable<Wedding_Playlist.Models.Event>;
+    var guestEventIds = ViewData["GuestEventIds"] as List<int> ?? new List<int>();
 }
 <style>
     body {
@@ -37,11 +39,11 @@
         transition: all 0.3s ease;
     }
 
-        .form-control:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
-            background: white;
-        }
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
+        background: white;
+    }
 
     .btn {
         padding: 10px 20px;
@@ -113,6 +115,31 @@
                     <label class="form-label" asp-for="Side"></label>
                     <input asp-for="Side" class="form-control" required />
                     <span asp-validation-for="Side" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Events Guest Can Attend</label>
+                    <div class="event-selection"
+                        style="max-height: 200px; overflow-y: auto; padding: 10px; border: 1px solid #ced4da; border-radius: 8px;">
+                        @if (allEvents != null && allEvents.Any())
+                        {
+                            @foreach (var evt in allEvents)
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="event_@evt.EventId"
+                                        name="selectedEvents" value="@evt.EventId" @(guestEventIds.Contains(evt.EventId) ?
+                                                                                                                   "checked" : "") />
+                            <label class="form-check-label" for="event_@evt.EventId">
+                                @evt.Name - @evt.Date.ToString("MMM dd, yyyy")
+                            </label>
+                        </div>
+                                                }
+                        }
+                        else
+                        {
+                            <p>No events available</p>
+                        }
+                    </div>
                 </div>
 
                 <div class="btn-group">
