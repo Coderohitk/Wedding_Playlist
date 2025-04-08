@@ -1,0 +1,114 @@
+@model IEnumerable<Wedding_Playlist.Models.EventDTO>
+@{
+    var EventName = ViewData["EventName"] as String;
+    var GuestList = ViewData["Guests"] as List<Guest>;
+}
+
+<style>
+    /* Reuse existing styling */
+    body {
+        background: #EFE5DC;
+
+    }
+
+    .page-title {
+        color: #000;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .button-container {
+        margin-bottom: 2rem;
+        text-align: right;
+    }
+
+    /* Table styling matching previous implementations */
+    .table-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px 0;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 31px;
+        overflow: hidden;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .styled-table thead th {
+        background: #B08B6F;
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .styled-table tbody td {
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .styled-table tbody tr:hover {
+        background: linear-gradient(to right, #fff7ef, #ebdbce);
+    }
+
+    /* Button styling */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #d9b497;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #B08B6F;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    h1 {
+        color: #000;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<h1 class="page-title">List Events</h1>
+<h1>@EventName</h1>
+<div class="table-container">
+    <table class="styled-table">
+                @foreach (var item in GuestList)
+                {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.RSVP_Status</td>
+                            <td>@item.Side</td>
+                            
+                        </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <a asp-action="ListEvent" class="btn btn-secondary">Back to List</a>
+</div>
