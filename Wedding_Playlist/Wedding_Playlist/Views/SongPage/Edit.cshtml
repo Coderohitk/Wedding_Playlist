@@ -2,126 +2,41 @@
 @{
     ViewData["Title"] = "Edit Song";
 }
-<style>
-    body {
-        background: #EFE5DC;
-    }
 
-    .form-container {
-        width: 100%;
-        max-width: 600px;
-        margin: 2rem auto;
-        padding: 30px;
-        border-radius: 31px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
-    }
+<div class="form-container">
+    <h2>Edit Song</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="SongId" />
 
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .control-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #000;
-        font-weight: bold;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.8);
-        transition: all 0.3s ease;
-    }
-
-        .form-control:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
-            background: white;
-        }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-    }
-
-    .btn-primary {
-        background-color: #d9b497;
-        color: white;
-    }
-
-    .btn-secondary {
-        background-color: #B08B6F;
-        color: white;
-    }
-
-    .btn:hover {
-        background-color: #B08B6F;
-        color: white;
-    }
-
-    .text-danger {
-        color: #dc3545;
-        font-size: 0.9rem;
-        margin-top: 0.25rem;
-    }
-
-    h2 {
-        color: #000;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-</style>
-
-<div class="custom-container">
-    <div class="custom-card">
-        <div class="card-header">
-            <h2>Edit Song</h2>
+        <div class="form-group">
+            <label asp-for="Title" class="control-label">Title</label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-        <div class="card-body">
-            <form asp-action="Edit" method="post">
-                <input type="hidden" asp-for="SongId" />
 
-                <div class="form-group">
-                    <label class="form-label" asp-for="Title"></label>
-                    <input asp-for="Title" class="form-control" required />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" asp-for="Artist"></label>
-                    <input asp-for="Artist" class="form-control" required />
-                    <span asp-validation-for="Artist" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" asp-for="Genre"></label>
-                    <input asp-for="Genre" class="form-control" required />
-                    <span asp-validation-for="Genre" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" asp-for="Description"></label>
-                    <textarea asp-for="Description" class="form-control" required></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+        <div class="form-group">
+            <label asp-for="Artist" class="control-label">Artist</label>
+            <input asp-for="Artist" class="form-control" required />
+            <span asp-validation-for="Artist" class="text-danger"></span>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label asp-for="Genre" class="control-label">Genre</label>
+            <input asp-for="Genre" class="form-control" required />
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Description</label>
+            <textarea asp-for="Description" class="form-control" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

@@ -72,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3Vlc3RQYWdlL1Rlc3RTb25nUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/GuestSongRequestPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3Vlc3RTb25nUmVxdWVzdFBhZ2UvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +90,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGxheWxpc3RQYWdlL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGxheWxpc3RQYWdlL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/sarrahgandhi/Documents/SCHOOL/Backend Web Development/CreativeCollab/Wedding_Playlist/Wedding_Playlist/Wedding_Playlist/Views/PlaylistPage/Edit.cshtml]

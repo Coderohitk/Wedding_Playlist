@@ -1,0 +1,126 @@
+@model List<Wedding_Playlist.Controllers.GuestSongRequestViewModel>
+@{
+    ViewData["Title"] = "Manage Song Requests";
+}
+
+<div class="custom-card">
+    <div class="card-header">
+        <h2 class="page-title">Manage Song Requests</h2>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="filters"
+        style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+        <div class="filter-group" style="display: flex; align-items: center;">
+            <label for="statusFilter" style="font-weight: bold; color: #B08B6F;">Filter by status:</label>
+            <select id="statusFilter" onchange="filterTable()"
+                style="margin-left: 10px; padding: 8px; border-radius: 8px; border: 1px solid #d9b497; background-color: #FBFEFB;">
+                <option value="all">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+        <input type="text" id="searchInput"
+            style="padding: 8px; border-radius: 8px; border: 1px solid #d9b497; width: 250px; background-color: #FBFEFB;"
+            placeholder="Search..." onkeyup="filterTable()">
+    </div>
+
+    <div class="table-container">
+        <table class="styled-table" id="requestsTable">
+            <thead>
+                <tr>
+                    <th>Guest</th>
+                    <th>Song</th>
+                    <th>Artist</th>
+                    <th>Event</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var request in Model)
+                    {
+                        <tr data-status="@request.Status">
+                            <td>@request.GuestName</td>
+                            <td>@request.SongTitle</td>
+                            <td>@request.SongArtist</td>
+                            <td>@request.EventName</td>
+                            <td>
+                                <span class="badge badge-@request.Status.ToLower()">@request.Status</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons" style="margin: 0; justify-content: flex-start;">
+                                    @if (request.Status != "Approved")
+                                    {
+                                        <form asp-action="UpdateStatus" method="post" style="display: inline;">
+                                            <input type="hidden" name="requestId" value="@request.RequestID" />
+                                            <input type="hidden" name="status" value="Approved" />
+                                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                        </form>
+                                    }
+                                    @if (request.Status != "Rejected")
+                                    {
+                                        <form asp-action="UpdateStatus" method="post" style="display: inline; margin-left: 5px;">
+                                            <input type="hidden" name="requestId" value="@request.RequestID" />
+                                            <input type="hidden" name="status" value="Rejected" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No song requests found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function filterTable() {
+        // Get filter values
+        var statusFilter = document.getElementById('statusFilter').value;
+        var searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+        // Get all rows from the table
+        var rows = document.querySelectorAll('#requestsTable tbody tr');
+
+        // Loop through rows and apply filters
+        rows.forEach(function (row) {
+            var status = row.getAttribute('data-status');
+            var showByStatus = statusFilter === 'all' || status === statusFilter;
+
+            var rowText = row.textContent.toLowerCase();
+            var showBySearch = searchInput === '' || rowText.includes(searchInput);
+
+            // Show/hide row based on filters
+            if (showByStatus && showBySearch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
