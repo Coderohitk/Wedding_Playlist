@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yOqj7kTWKT8=",
+  "dgSpecHash": "eGm9noidaYM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rohit kumar\\Downloads\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
+  "projectFilePath": "C:\\Users\\Rohit kumar\\Documents\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rohit kumar\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Rohit kumar\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

@@ -4603,11 +4603,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rohit kumar\\Downloads\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
+      "projectUniqueName": "C:\\Users\\Rohit kumar\\Documents\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
       "projectName": "Wedding_Playlist",
-      "projectPath": "C:\\Users\\Rohit kumar\\Downloads\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
+      "projectPath": "C:\\Users\\Rohit kumar\\Documents\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist.csproj",
       "packagesPath": "C:\\Users\\Rohit kumar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rohit kumar\\Downloads\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\obj\\",
+      "outputPath": "C:\\Users\\Rohit kumar\\Documents\\Wedding_Playlist\\Wedding_Playlist\\Wedding_Playlist\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
