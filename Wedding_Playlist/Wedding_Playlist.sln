@@ -1,8 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+VisualStudioVersion = 17.13.35825.156 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding_Playlist", "Wedding_Playlist.csproj", "{F8D2D621-9AB8-2E7F-14DC-F55FF24FD5D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding_Playlist", "Wedding_Playlist\Wedding_Playlist.csproj", "{B04D094F-0BBC-425A-93BB-3F2849AACB73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F8D2D621-9AB8-2E7F-14DC-F55FF24FD5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8D2D621-9AB8-2E7F-14DC-F55FF24FD5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8D2D621-9AB8-2E7F-14DC-F55FF24FD5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8D2D621-9AB8-2E7F-14DC-F55FF24FD5D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04D094F-0BBC-425A-93BB-3F2849AACB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04D094F-0BBC-425A-93BB-3F2849AACB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04D094F-0BBC-425A-93BB-3F2849AACB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04D094F-0BBC-425A-93BB-3F2849AACB73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E1D95E69-259C-4FD6-8F6D-A0E323AD920F}
+		SolutionGuid = {2981F62D-2833-470F-9500-E97282B08239}
 	EndGlobalSection
 EndGlobal
