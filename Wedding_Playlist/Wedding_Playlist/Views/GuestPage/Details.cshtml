@@ -1,0 +1,302 @@
+﻿@model IEnumerable<Wedding_Playlist.Models.EventDTO>
+@{
+    var guest = ViewData["Guest"] as Wedding_Playlist.Models.Guest;
+    var GuestName = ViewData["GuestName"] as String;
+    var Events = ViewData["Events"] as List<Wedding_Playlist.Models.Event>;
+    var EventCount = (int)ViewData["EventCount"];
+    var SongList = ViewData["SongList"] as List<Wedding_Playlist.Models.SongWithStatusDTO>;
+    var SongCount = ViewData["SongCount"];
+    var SongNotFound = ViewData["SongNotFound"] as string;
+}
+
+<style>
+    /* Reuse existing styling */
+    body {
+        background: #EFE5DC;
+
+    }
+
+    .page-title {
+        color: #000;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .button-container {
+        margin-bottom: 2rem;
+        text-align: right;
+    }
+
+    /* Table styling matching previous implementations */
+    .table-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px 0;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 31px;
+        overflow: hidden;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .styled-table thead th {
+        background: #B08B6F;
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .styled-table tbody td {
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .styled-table tbody tr:hover {
+        background: linear-gradient(to right, #fff7ef, #ebdbce);
+    }
+
+    /* Button styling */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #d9b497;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #B08B6F;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    h1 {
+        color: #000;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    h2{
+    font-size:1.1rem;
+    }
+
+    .guest-card {
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .guest-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .guest-info-item {
+        margin-bottom: 10px;
+    }
+    
+    .guest-info-label {
+        font-weight: bold;
+        color: #B08B6F;
+    }
+    
+    .section-title {
+        border-bottom: 2px solid #B08B6F;
+        padding-bottom: 8px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: #B08B6F;
+    }
+    
+    .action-buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .badge {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .badge-pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+    
+    .badge-approved {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .badge-rejected {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>
+
+<div class="container">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="guest-card">
+        <h1>Guest Details</h1>
+        
+        <div class="guest-info">
+            <div class="guest-info-item">
+                <span class="guest-info-label">Name:</span>
+                <span>@GuestName</span>
+            </div>
+            <div class="guest-info-item">
+                <span class="guest-info-label">Email:</span>
+                <span>@guest.Email</span>
+            </div>
+            <div class="guest-info-item">
+                <span class="guest-info-label">RSVP Status:</span>
+                <span>@guest.RSVP_Status</span>
+            </div>
+            <div class="guest-info-item">
+                <span class="guest-info-label">Side:</span>
+                <span>@guest.Side</span>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a asp-action="Edit" asp-route-id="@guest.GuestId" class="btn btn-primary">Edit Guest</a>
+            <a asp-action="AddTestSongRequest" asp-route-id="@guest.GuestId" class="btn btn-secondary">Add Song Request</a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Attending Events (@EventCount)</h2>
+    
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Events != null && Events.Any())
+                {
+                    @foreach (var item in Events)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Date.ToString("MMM dd, yyyy")</td>
+                            <td>@item.Location</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">This guest is not attending any events.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-title">Song Requests (@(SongCount ?? 0))</h2>
+    
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (SongList != null && SongList.Any())
+                {
+                    @foreach (var song in SongList)
+                    {
+                        <tr>
+                            <td>@song.Title</td>
+                            <td>@song.Artist</td>
+                            <td>@song.Genre</td>
+                            <td>
+                                <span class="badge @(song.Status == "Approved" ? "badge-approved" : (song.Status == "Rejected" ? "badge-rejected" : "badge-pending"))">
+                                    @song.Status
+                                </span>
+                            </td>
+                            <td>
+                                @if (song.Status != "Approved")
+                                {
+                                    <form asp-controller="GuestPage" asp-action="UpdateSongRequestStatus" method="post" style="display: inline;">
+                                        <input type="hidden" name="requestId" value="@song.RequestID" />
+                                        <input type="hidden" name="guestId" value="@guest.GuestId" />
+                                        <input type="hidden" name="status" value="Approved" />
+                                        <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                                    </form>
+                                }
+                                @if (song.Status != "Rejected")
+                                {
+                                    <form asp-controller="GuestPage" asp-action="UpdateSongRequestStatus" method="post" style="display: inline;">
+                                        <input type="hidden" name="requestId" value="@song.RequestID" />
+                                        <input type="hidden" name="guestId" value="@guest.GuestId" />
+                                        <input type="hidden" name="status" value="Rejected" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">No song requests from this guest.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

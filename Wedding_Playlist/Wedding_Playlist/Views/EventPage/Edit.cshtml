@@ -1,0 +1,38 @@
+@model Wedding_Playlist.Models.EventDTO
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<div class="form-container">
+    <h2>Edit Event</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="EventId" />
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Date"></label>
+            <input asp-for="Date" type="date" class="form-control" required />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Location"></label>
+            <input asp-for="Location" class="form-control" required />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="ListEvent" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

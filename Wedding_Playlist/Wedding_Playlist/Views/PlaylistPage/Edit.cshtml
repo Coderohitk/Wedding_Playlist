@@ -1,0 +1,110 @@
+﻿@model Wedding_Playlist.Models.PlaylistDTO
+@{
+    ViewData["Title"] = "Edit Playlist";
+}
+<style>
+    body {
+        background: #EFE5DC;
+    }
+
+    .form-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        border-radius: 31px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #000;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .control-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid rgba(176, 139, 111, 0.5);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
+        background: white;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        background: #d9b497;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #B08B6F;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Edit Playlist</h2>
+    <form asp-action="EditPlaylist" method="post">
+        <input type="hidden" asp-for="PlaylistID" />
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Playlist Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="control-label">Created By</label>
+            <input asp-for="CreatedBy" class="form-control" required />
+            <span asp-validation-for="CreatedBy" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="ListPlaylist" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
