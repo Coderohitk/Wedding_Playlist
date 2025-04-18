@@ -16,7 +16,16 @@ namespace Wedding_Playlist.Controllers
             _context = context;
         }
 
-        // GET: api/EventGuest
+        /// <summary>
+        /// Returns a list of all EventGuest entries
+        /// </summary>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{EventGuestDTO},{EventGuestDTO},..]
+        /// </returns>
+        /// <example>
+        /// GET: api/EventGuest
+        /// </example>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventGuestDTO>>> GetAllEventGuests()
         {
@@ -30,7 +39,18 @@ namespace Wedding_Playlist.Controllers
             return Ok(eventGuests);
         }
 
-        // GET: api/EventGuest/5
+        /// <summary>
+        /// Returns a specific EventGuest by ID
+        /// </summary>
+        /// <param name="id">EventGuest ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {EventGuestDTO}<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// GET: api/EventGuest/5
+        /// </example>
         [HttpGet("{id}")]
         public async Task<ActionResult<EventGuestDTO>> GetEventGuest(int id)
         {
@@ -48,7 +68,19 @@ namespace Wedding_Playlist.Controllers
             };
             return Ok(eventGuestDTO);
         }
-        
+
+        /// <summary>
+        /// Returns all EventGuests for a specific Event ID
+        /// </summary>
+        /// <param name="id">Event ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// List of EventGuestDTO<br/>
+        /// 404 Not Found if no matches
+        /// </returns>
+        /// <example>
+        /// GET: api/EventGuest/event/3
+        /// </example>
         [HttpGet("event/{id}")]
         public async Task<ActionResult<List<EventGuestDTO>>> GetEventGuestByEventID(int id)
         {
@@ -57,19 +89,28 @@ namespace Wedding_Playlist.Controllers
             {
                 return NotFound();
             }
-            var eventGuestDTO = new List<EventGuestDTO>();
-            foreach (var eventGuest in eventGuests)
+            var eventGuestDTO = eventGuests.Select(eventGuest => new EventGuestDTO
             {
-                var eventguestlist = new EventGuestDTO
-                {
-                    EventGuestId = eventGuest.EventGuestId,
-                    EventId = eventGuest.EventId,
-                    GuestId = eventGuest.GuestId
-                };
-                eventGuestDTO.Add(eventguestlist);
-            }
+                EventGuestId = eventGuest.EventGuestId,
+                EventId = eventGuest.EventId,
+                GuestId = eventGuest.GuestId
+            }).ToList();
+
             return Ok(eventGuestDTO);
         }
+
+        /// <summary>
+        /// Returns all EventGuests for a specific Guest ID
+        /// </summary>
+        /// <param name="id">Guest ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// List of EventGuestDTO<br/>
+        /// 404 Not Found if no matches
+        /// </returns>
+        /// <example>
+        /// GET: api/EventGuest/guest/4
+        /// </example>
         [HttpGet("guest/{id}")]
         public async Task<ActionResult<List<EventGuestDTO>>> GetEventGuestByGuestID(int id)
         {
@@ -78,19 +119,29 @@ namespace Wedding_Playlist.Controllers
             {
                 return NotFound();
             }
-            var eventGuestDTO = new List<EventGuestDTO>();
-            foreach (var eventGuest in eventGuests)
+            var eventGuestDTO = eventGuests.Select(eventGuest => new EventGuestDTO
             {
-                var eventguestlist = new EventGuestDTO
-                {
-                    EventGuestId = eventGuest.EventGuestId,
-                    EventId = eventGuest.EventId,
-                    GuestId = eventGuest.GuestId
-                };
-                eventGuestDTO.Add(eventguestlist);
-            }
+                EventGuestId = eventGuest.EventGuestId,
+                EventId = eventGuest.EventId,
+                GuestId = eventGuest.GuestId
+            }).ToList();
+
             return Ok(eventGuestDTO);
         }
+
+        /// <summary>
+        /// Creates a new EventGuest entry
+        /// </summary>
+        /// <param name="eventGuestDTO">New EventGuestDTO</param>
+        /// <returns>
+        /// 201 Created<br/>
+        /// URI to newly created EventGuest<br/>
+        /// 400 Bad Request if data is invalid
+        /// </returns>
+        /// <example>
+        /// POST: api/EventGuest<br/>
+        /// Body: { "eventId": 1, "guestId": 2 }
+        /// </example>
         [HttpPost]
         public async Task<ActionResult<EventGuestDTO>> CreateEventGuest([FromBody] EventGuestDTO eventGuestDTO)
         {
@@ -98,17 +149,35 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var newEventGuest = new EventGuest
             {
                 EventId = eventGuestDTO.EventId,
                 GuestId = eventGuestDTO.GuestId
-
             };
+
             _context.EventGuests.Add(newEventGuest);
             await _context.SaveChangesAsync();
+
             eventGuestDTO.EventGuestId = newEventGuest.EventGuestId;
             return CreatedAtAction(nameof(GetEventGuest), new { id = newEventGuest.EventGuestId }, eventGuestDTO);
         }
+
+        /// <summary>
+        /// Updates an existing EventGuest entry
+        /// </summary>
+        /// <param name="id">EventGuest ID</param>
+        /// <param name="eventGuestDTO">Updated EventGuestDTO</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// Updated object<br/>
+        /// 400 Bad Request if ID mismatch<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// PUT: api/EventGuest/5<br/>
+        /// Body: { "eventGuestId": 5, "eventId": 1, "guestId": 2 }
+        /// </example>
         [HttpPut("{id}")]
         public async Task<ActionResult<EventGuestDTO>> UpdateEventGuest([FromRoute] int id, [FromBody] EventGuestDTO eventGuestDTO)
         {
@@ -116,6 +185,7 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var eventGuestToUpdate = await _context.EventGuests.FindAsync(id);
             if (eventGuestToUpdate == null)
             {
@@ -129,6 +199,19 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(eventGuestToUpdate);
         }
+
+        /// <summary>
+        /// Deletes an EventGuest entry by ID
+        /// </summary>
+        /// <param name="id">EventGuest ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// Deleted object<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// DELETE: api/EventGuest/5
+        /// </example>
         [HttpDelete("{id}")]
         public async Task<ActionResult<EventGuestDTO>> DeleteEventGuest([FromRoute] int id)
         {

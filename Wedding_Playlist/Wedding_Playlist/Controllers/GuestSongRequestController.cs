@@ -19,7 +19,16 @@ namespace Wedding_Playlist.Controllers
             _guestSongRequestService = guestSongRequestService;
         }
 
-        // GET: api/GuestSongRequest
+        /// <summary>
+        /// Returns a list of all Guest Song Requests
+        /// </summary>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{GuestSongRequestDTO}, {GuestSongRequestDTO}, ...]
+        /// </returns>
+        /// <example>
+        /// GET: api/GuestSongRequest
+        /// </example>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GuestSongRequestDTO>>> GetAllGuestSongRequests()
         {
@@ -32,20 +41,34 @@ namespace Wedding_Playlist.Controllers
                     SongID = s.SongID,
                     Status = s.Status
                 }).ToListAsync();
+
             return Ok(guestSongRequests);
         }
 
-        // GET: api/GuestSongRequest/5
+        /// <summary>
+        /// Returns a Guest Song Request by ID
+        /// </summary>
+        /// <param name="id">Request ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {GuestSongRequestDTO}<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// GET: api/GuestSongRequest/5
+        /// </example>
         [HttpGet("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> GetGuestSongRequest(int id)
         {
             var guestSongRequest = await _context.GuestSongRequests
-                .Where(s => s.RequestID == id).FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(s => s.RequestID == id);
+
             if (guestSongRequest == null)
             {
                 return NotFound();
             }
-            var guestSongRequestDTO = new GuestSongRequestDTO
+
+            var dto = new GuestSongRequestDTO
             {
                 RequestID = guestSongRequest.RequestID,
                 EventID = guestSongRequest.EventID,
@@ -53,23 +76,47 @@ namespace Wedding_Playlist.Controllers
                 SongID = guestSongRequest.SongID,
                 Status = guestSongRequest.Status
             };
-            return Ok(guestSongRequestDTO);
+
+            return Ok(dto);
         }
 
-        // GET: api/GuestSongRequest/details/5
+        /// <summary>
+        /// Returns detailed information for a Guest Song Request by ID using the service layer
+        /// </summary>
+        /// <param name="id">Request ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// ServiceResponse with additional metadata<br/>
+        /// 404 Not Found if request doesn't exist
+        /// </returns>
+        /// <example>
+        /// GET: api/GuestSongRequest/details/5
+        /// </example>
         [HttpGet("details/{id}")]
         public async Task<IActionResult> GetGuestSongRequestById(int id)
         {
             var response = await _guestSongRequestService.GetGuestSongRequestById(id);
-            
+
             if (!response.Success)
             {
                 return NotFound(new { message = response.Messages.FirstOrDefault() });
             }
-            
+
             return Ok(response);
         }
 
+        /// <summary>
+        /// Creates a new Guest Song Request
+        /// </summary>
+        /// <param name="guestSongRequestDTO">GuestSongRequestDTO object</param>
+        /// <returns>
+        /// 201 Created<br/>
+        /// URI to the newly created GuestSongRequest
+        /// </returns>
+        /// <example>
+        /// POST: api/GuestSongRequest<br/>
+        /// Body: { "eventID": 1, "guestID": 2, "songID": 5, "status": "Pending" }
+        /// </example>
         [HttpPost]
         public async Task<ActionResult<GuestSongRequestDTO>> CreateGuestSongRequest([FromBody] GuestSongRequestDTO guestSongRequestDTO)
         {
@@ -77,19 +124,37 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
-            var newGuestSongRequest = new GuestSongRequest
+
+            var newRequest = new GuestSongRequest
             {
                 EventID = guestSongRequestDTO.EventID,
                 GuestID = guestSongRequestDTO.GuestID,
                 SongID = guestSongRequestDTO.SongID,
                 Status = guestSongRequestDTO.Status
-
             };
-            _context.GuestSongRequests.Add(newGuestSongRequest);
+
+            _context.GuestSongRequests.Add(newRequest);
             await _context.SaveChangesAsync();
-            guestSongRequestDTO.RequestID = newGuestSongRequest.RequestID;
-            return CreatedAtAction(nameof(GetGuestSongRequest), new { id = newGuestSongRequest.RequestID }, guestSongRequestDTO);
+
+            guestSongRequestDTO.RequestID = newRequest.RequestID;
+
+            return CreatedAtAction(nameof(GetGuestSongRequest), new { id = newRequest.RequestID }, guestSongRequestDTO);
         }
+
+        /// <summary>
+        /// Updates an existing Guest Song Request
+        /// </summary>
+        /// <param name="id">Request ID</param>
+        /// <param name="guestSongRequestDTO">Updated GuestSongRequestDTO</param>
+        /// <returns>
+        /// 200 OK with status and updated DTO<br/>
+        /// 400 Bad Request if ID mismatch<br/>
+        /// 404 Not Found if request doesn't exist
+        /// </returns>
+        /// <example>
+        /// PUT: api/GuestSongRequest/7<br/>
+        /// Body: { "requestID": 7, "eventID": 1, "guestID": 2, "songID": 5, "status": "Approved" }
+        /// </example>
         [HttpPut("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> UpdateGuestSongRequest([FromRoute] int id, [FromBody] GuestSongRequestDTO guestSongRequestDTO)
         {
@@ -97,21 +162,33 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
-            
+
             var response = await _guestSongRequestService.UpdateGuestSongRequest(guestSongRequestDTO);
-            
+
             if (response.Status == ServiceResponse.ServiceStatus.Error)
             {
                 return NotFound();
             }
-            
-            // Return messages that include information about the EventSong addition
-            return Ok(new { 
+
+            return Ok(new
+            {
                 Status = response.Status,
                 Messages = response.Messages,
                 GuestSongRequest = guestSongRequestDTO
             });
         }
+
+        /// <summary>
+        /// Deletes a Guest Song Request by ID
+        /// </summary>
+        /// <param name="id">Request ID</param>
+        /// <returns>
+        /// 200 OK with deleted GuestSongRequest object<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// DELETE: api/GuestSongRequest/4
+        /// </example>
         [HttpDelete("{id}")]
         public async Task<ActionResult<GuestSongRequestDTO>> DeleteGuestSongRequest([FromRoute] int id)
         {

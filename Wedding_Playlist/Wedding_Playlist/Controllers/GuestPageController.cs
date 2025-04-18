@@ -4,24 +4,32 @@ using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
 using Wedding_Playlist.Interfaces;
 using CoreEntityFramework.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Wedding_Playlist.Controllers
 {
-    public class GuestPageController : Controller
+    public class GuestPageController : BaseController
     {
         private readonly IGuestService _guestService;
         private readonly IEventService _eventService;
         private readonly IEventGuestService _eventGuestService;
         private readonly IGuestSongRequestService _guestSongRequestService;
         private readonly ISongService _songService;
-        public GuestPageController(IGuestService guestService,IEventService eventService, IEventGuestService eventGuestService, IGuestSongRequestService guestSongRequestService,ISongService songService)
+        
+        public GuestPageController(
+            IGuestService guestService,
+            IEventService eventService, 
+            IEventGuestService eventGuestService, 
+            IGuestSongRequestService guestSongRequestService,
+            ISongService songService,
+            IDashboardService dashboardService) 
+            : base(dashboardService)
         {
             _guestService = guestService;
             _eventService = eventService;
             _eventGuestService = eventGuestService;
             _guestSongRequestService = guestSongRequestService;
             _songService = songService;
-
         }
 
         public async Task<IActionResult> Index()
@@ -150,6 +158,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var guest = await _guestService.GetGuestById(id);
@@ -177,6 +186,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, GuestDTO guestDTO, int[] selectedEvents)
         {
@@ -246,6 +256,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var guest = await _guestService.GetGuestById(id);
@@ -263,6 +274,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -275,6 +287,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> TestSongRequests()
         {
             var allRequests = await _guestSongRequestService.GetAllGuestSongRequests();
@@ -303,6 +316,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> AddTestSongRequest(int id)
         {
             var guest = await _guestService.GetGuestById(id);
@@ -318,6 +332,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddTestSongRequest(GuestSongRequestDTO request)
         {
             if (request != null)
@@ -334,6 +349,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateSongRequestStatus(int requestId, int guestId, string status)
         {
             // Get the current request

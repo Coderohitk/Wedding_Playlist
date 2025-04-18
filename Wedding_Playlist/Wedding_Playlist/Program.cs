@@ -24,6 +24,7 @@ builder.Services.AddScoped<IEventSongService, EventSongService>();
 builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 builder.Services.AddScoped<IPlaylistSongService, PlaylistSongService>();
 builder.Services.AddScoped<IGuestSongRequestService, GuestSongRequestService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {

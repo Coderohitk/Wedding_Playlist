@@ -4,10 +4,12 @@ using Wedding_Playlist.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Wedding_Playlist.Models.ViewModel;
 
 namespace Wedding_Playlist.Controllers
 {
-    public class GuestSongRequestPageController : Controller
+    public class GuestSongRequestPageController : BaseController
     {
         private readonly IGuestSongRequestService _guestSongRequestService;
         private readonly IGuestService _guestService;
@@ -20,7 +22,9 @@ namespace Wedding_Playlist.Controllers
             IGuestService guestService,
             ISongService songService,
             IEventService eventService,
-            IEventSongService eventSongService)
+            IEventSongService eventSongService,
+            IDashboardService dashboardService)
+            : base(dashboardService)
         {
             _guestSongRequestService = guestSongRequestService;
             _guestService = guestService;
@@ -58,6 +62,8 @@ namespace Wedding_Playlist.Controllers
         }
         
         [HttpPost]
+        [Authorize]
+
         public async Task<IActionResult> UpdateStatus(int requestId, string status)
         {
             try
@@ -124,16 +130,5 @@ namespace Wedding_Playlist.Controllers
         }
     }
     
-    public class GuestSongRequestViewModel
-    {
-        public int RequestID { get; set; }
-        public int GuestID { get; set; }
-        public string GuestName { get; set; }
-        public int SongID { get; set; }
-        public string SongTitle { get; set; }
-        public string SongArtist { get; set; }
-        public int EventID { get; set; }
-        public string EventName { get; set; }
-        public string Status { get; set; }
-    }
+   
 } 

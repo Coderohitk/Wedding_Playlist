@@ -3,16 +3,25 @@ using Microsoft.EntityFrameworkCore;
 using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
 using Wedding_Playlist.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 namespace Wedding_Playlist.Controllers
 {
-    public class EventPageController : Controller
+    public class EventPageController : BaseController
     {
         private readonly IEventService _eventService;
         private readonly IGuestService _guestService;
         private readonly IEventGuestService _eventGuestService;
         private readonly IEventSongService _EventSongService;
         private readonly ISongService _songService;
-        public EventPageController(IEventService eventService, IGuestService guestService,IEventGuestService eventGuestService, IEventSongService eventSongService,ISongService songService)
+        
+        public EventPageController(
+            IEventService eventService, 
+            IGuestService guestService,
+            IEventGuestService eventGuestService, 
+            IEventSongService eventSongService,
+            ISongService songService,
+            IDashboardService dashboardService)
+            : base(dashboardService)
         {
             _eventService = eventService;
             _guestService = guestService;
@@ -84,6 +93,7 @@ namespace Wedding_Playlist.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var eventDTO = await _eventService.GetEventById(id);
@@ -101,6 +111,7 @@ namespace Wedding_Playlist.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EventDTO eventDTO)
         {
@@ -116,6 +127,7 @@ namespace Wedding_Playlist.Controllers
             return View(eventDTO);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var eventDTO = await _eventService.GetEventById(id);
@@ -127,6 +139,7 @@ namespace Wedding_Playlist.Controllers
             return View(eventDTO); // This will render your delete confirmation page
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteEvent(int id)
         {

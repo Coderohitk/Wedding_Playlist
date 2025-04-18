@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Wedding_Playlist.Controllers
 {
-    public class SongPageController : Controller
+    public class SongPageController : BaseController
     {
         private readonly ISongService _songService;
         private readonly IEventService _eventService;
@@ -14,7 +15,14 @@ namespace Wedding_Playlist.Controllers
         private readonly IEventSongService _eventSongService;
         private readonly IPlaylistSongService _playlistSongService;
 
-        public SongPageController(ISongService songService, IEventService eventService, IPlaylistService playlistService, IEventSongService eventSongService, IPlaylistSongService playlistSongService)
+        public SongPageController(
+            ISongService songService, 
+            IEventService eventService, 
+            IPlaylistService playlistService, 
+            IEventSongService eventSongService, 
+            IPlaylistSongService playlistSongService,
+            IDashboardService dashboardService)
+            : base(dashboardService)
         {
             _songService = songService;
             _eventService = eventService;
@@ -115,6 +123,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var song = await _songService.GetSong(id);
@@ -135,6 +144,7 @@ namespace Wedding_Playlist.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SongDTO songDTO)
         {
@@ -151,6 +161,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var song = await _songService.GetSong(id);
@@ -172,6 +183,7 @@ namespace Wedding_Playlist.Controllers
 
 
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

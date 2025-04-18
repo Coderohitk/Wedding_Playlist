@@ -9,18 +9,22 @@ namespace Wedding_Playlist.Controllers
     public class GuestAPIController : ControllerBase
     {
         private readonly IGuestService _guestService;
+
         public GuestAPIController(IGuestService guestService)
         {
             _guestService = guestService;
         }
+
         /// <summary>
-        /// Retrieves a list of all guests stored in the system.  
-        /// This method asynchronously calls the guest service to fetch all available guests.  
-        /// It returns an `IEnumerable<Guest>` wrapped in an `ActionResult`.  
-        /// If successful, it responds with an HTTP 200 status along with the list of guests.  
-        /// If there are no guests, it still returns an empty list rather than an error.  
-        /// This method does not require any parameters.
+        /// Returns a list of all Guests
         /// </summary>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{GuestDTO},{GuestDTO},..]
+        /// </returns>
+        /// <example>
+        /// GET: api/GuestAPI/Guest
+        /// </example>
         [HttpGet("Guest")]
         public async Task<ActionResult<IEnumerable<GuestDTO>>> GetGuest()
         {
@@ -37,15 +41,18 @@ namespace Wedding_Playlist.Controllers
             return Ok(guestDTOs);
         }
 
-
         /// <summary>
-        /// Fetches a specific guest by their unique ID.  
-        /// The method takes an integer `id` as a parameter and queries the service for a matching guest.  
-        /// If a guest is found, it returns an HTTP 200 response with the guest details.  
-        /// If no guest matches the provided ID, it returns an HTTP 404 Not Found response.  
-        /// This helps ensure that only valid guest records are accessed in the system.  
-        /// The method is useful for retrieving guest details in a detailed view.
+        /// Returns a Guest by ID
         /// </summary>
+        /// <param name="id">Guest ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {GuestDTO}<br/>
+        /// 404 Not Found if guest does not exist
+        /// </returns>
+        /// <example>
+        /// GET: api/GuestAPI/GetGuestById?id=5
+        /// </example>
         [HttpGet("GetGuestById")]
         public async Task<ActionResult<GuestDTO>> FindGuest(int id)
         {
@@ -64,15 +71,20 @@ namespace Wedding_Playlist.Controllers
             return Ok(guestDTO);
         }
 
-
         /// <summary>
-        /// Updates an existing guest's details in the system.  
-        /// It requires the guest ID as a URL parameter and the updated `Guest` object in the request body.  
-        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
-        /// If the guest does not exist, an HTTP 404 Not Found response is returned.  
-        /// On successful update, the method returns an HTTP 204 No Content response.  
-        /// This ensures that modifications to guest details are properly validated and processed.
+        /// Updates an existing Guest
         /// </summary>
+        /// <param name="id">Guest ID</param>
+        /// <param name="updateguest">Updated GuestDTO object</param>
+        /// <returns>
+        /// 204 No Content<br/>
+        /// 400 Bad Request if IDs do not match<br/>
+        /// 404 Not Found or 500 Internal Server Error on failure
+        /// </returns>
+        /// <example>
+        /// PUT: api/GuestAPI/UpdateGuest/3<br/>
+        /// Body: { "guestId": 3, "name": "Alex", "email": "alex@email.com", "rsvp_Status": "Accepted", "side": "Bride" }
+        /// </example>
         [HttpPut("UpdateGuest/{id}")]
         public async Task<ActionResult> UpdateGuest(int id, GuestDTO updateguest)
         {
@@ -91,14 +103,18 @@ namespace Wedding_Playlist.Controllers
             }
             return NoContent();
         }
+
         /// <summary>
-        /// Deletes a guest from the system based on their unique ID.  
-        /// It accepts an integer `id` as a parameter and attempts to remove the corresponding guest record.  
-        /// If the guest exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
-        /// If the guest does not exist, an HTTP 404 Not Found response is returned.  
-        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
-        /// This method ensures proper deletion while handling errors gracefully.
+        /// Deletes a Guest by ID
         /// </summary>
+        /// <param name="id">Guest ID</param>
+        /// <returns>
+        /// 200 OK with confirmation message<br/>
+        /// 404 Not Found or 500 Internal Server Error on failure
+        /// </returns>
+        /// <example>
+        /// DELETE: api/GuestAPI/DeleteGuest/3
+        /// </example>
         [HttpDelete("DeleteGuest/{id}")]
         public async Task<ActionResult<Guest>> DeleteGuest(int id)
         {

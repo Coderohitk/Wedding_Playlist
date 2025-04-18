@@ -5,7 +5,7 @@ using Wedding_Playlist.Models;
 
 namespace WeddingPlaylist.Controllers
 {
-    [Route("api/[controller]")] // Base route: api/song
+    [Route("api/[controller]")]
     [ApiController]
     public class SongController : ControllerBase
     {
@@ -16,7 +16,16 @@ namespace WeddingPlaylist.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/song - Retrieve all songs
+        /// <summary>
+        /// Returns a list of Songs
+        /// </summary>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{SongDTO},{SongDTO},..]
+        /// </returns>
+        /// <example>
+        /// GET: api/Song -> [{SongDTO},{SongDTO},..]
+        /// </example>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SongDTO>>> GetSongs()
         {
@@ -34,7 +43,18 @@ namespace WeddingPlaylist.Controllers
             return Ok(songs);
         }
 
-        // ✅ GET: api/song/{id} - Retrieve a song by ID
+        /// <summary>
+        /// Returns a Song by ID
+        /// </summary>
+        /// <param name="id">Song ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {SongDTO}<br/>
+        /// 404 Not Found if song does not exist
+        /// </returns>
+        /// <example>
+        /// GET: api/Song/3 -> {SongDTO}
+        /// </example>
         [HttpGet("{id}")]
         public async Task<ActionResult<SongDTO>> GetSong([FromRoute] int id)
         {
@@ -56,7 +76,19 @@ namespace WeddingPlaylist.Controllers
             return Ok(songDTO);
         }
 
-        // ✅ POST: api/song - Create a new song
+        /// <summary>
+        /// Creates a new Song
+        /// </summary>
+        /// <param name="songDTO">SongDTO object</param>
+        /// <returns>
+        /// 201 Created<br/>
+        /// URI to newly created resource<br/>
+        /// 400 Bad Request if data is invalid
+        /// </returns>
+        /// <example>
+        /// POST: api/Song<br/>
+        /// Body: { "title": "Perfect", "artist": "Ed Sheeran", "genre": "Pop", "description": "Wedding song" }
+        /// </example>
         [HttpPost]
         public async Task<ActionResult<SongDTO>> CreateSong([FromBody] SongDTO songDTO)
         {
@@ -76,11 +108,24 @@ namespace WeddingPlaylist.Controllers
             _context.Songs.Add(song);
             await _context.SaveChangesAsync();
 
-            songDTO.SongId = song.SongId; // Assign the newly created ID
+            songDTO.SongId = song.SongId;
             return CreatedAtAction(nameof(GetSong), new { id = song.SongId }, songDTO);
         }
 
-        // ✅ PUT: api/song/{id} - Update song details
+        /// <summary>
+        /// Updates an existing Song
+        /// </summary>
+        /// <param name="id">Song ID</param>
+        /// <param name="songDTO">Updated SongDTO object</param>
+        /// <returns>
+        /// 204 No Content<br/>
+        /// 400 Bad Request if ID mismatch<br/>
+        /// 404 Not Found if song does not exist
+        /// </returns>
+        /// <example>
+        /// PUT: api/Song/3<br/>
+        /// Body: { "songId": 3, "title": "Updated Title", "artist": "New Artist", "genre": "Jazz", "description": "Updated info" }
+        /// </example>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSong([FromRoute] int id, [FromBody] SongDTO songDTO)
         {
@@ -95,7 +140,6 @@ namespace WeddingPlaylist.Controllers
                 return NotFound();
             }
 
-            // Update the song details
             song.Title = songDTO.Title;
             song.Artist = songDTO.Artist;
             song.Genre = songDTO.Genre;
@@ -107,7 +151,17 @@ namespace WeddingPlaylist.Controllers
             return NoContent();
         }
 
-        // ✅ DELETE: api/song/{id} - Delete a song
+        /// <summary>
+        /// Deletes a Song by ID
+        /// </summary>
+        /// <param name="id">Song ID</param>
+        /// <returns>
+        /// 204 No Content<br/>
+        /// 404 Not Found if song does not exist
+        /// </returns>
+        /// <example>
+        /// DELETE: api/Song/3
+        /// </example>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSong([FromRoute] int id)
         {

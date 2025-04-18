@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wedding_Playlist.Data;
@@ -17,9 +16,18 @@ namespace Wedding_Playlist.Controllers
             _context = context;
         }
 
-        // GET: api/PlaylistSong [HttpGet]
+        /// <summary>
+        /// Returns a list of all PlaylistSong entries
+        /// </summary>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{PlaylistSongDTO}, {PlaylistSongDTO}, ...]
+        /// </returns>
+        /// <example>
+        /// GET: api/PlaylistSong
+        /// </example>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylistSongs()
+        public async Task<ActionResult<IEnumerable<PlaylistSongDTO>>> GetAllPlaylistSongs()
         {
             var playlistSongs = await _context.PlaylistSongs
                 .Select(s => new PlaylistSongDTO
@@ -29,19 +37,34 @@ namespace Wedding_Playlist.Controllers
                     SongID = s.SongID,
                     Order = s.Order
                 }).ToListAsync();
+
             return Ok(playlistSongs);
         }
 
-        // GET: api/PlaylistSong/{id}
+        /// <summary>
+        /// Returns a specific PlaylistSong entry by ID
+        /// </summary>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {PlaylistSongDTO}<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// GET: api/PlaylistSong/5
+        /// </example>
         [HttpGet("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> GetPlaylistSong(int id)
         {
             var playlistSong = await _context.PlaylistSongs
-                .Where(ps => ps.PlaylistSongId == id).FirstOrDefaultAsync();
+                .Where(ps => ps.PlaylistSongId == id)
+                .FirstOrDefaultAsync();
+
             if (playlistSong == null)
             {
                 return NotFound();
             }
+
             var playlistSongDTO = new PlaylistSongDTO
             {
                 PlaylistSongId = playlistSong.PlaylistSongId,
@@ -49,8 +72,22 @@ namespace Wedding_Playlist.Controllers
                 SongID = playlistSong.SongID,
                 Order = playlistSong.Order
             };
+
             return Ok(playlistSongDTO);
         }
+
+        /// <summary>
+        /// Creates a new PlaylistSong entry
+        /// </summary>
+        /// <param name="playlistSongDTO">PlaylistSongDTO object</param>
+        /// <returns>
+        /// 201 Created<br/>
+        /// URI to newly created resource
+        /// </returns>
+        /// <example>
+        /// POST: api/PlaylistSong<br/>
+        /// Body: { "playlistID": 1, "songID": 2, "order": 3 }
+        /// </example>
         [HttpPost]
         public async Task<ActionResult<PlaylistSongDTO>> CreatePlaylistSong([FromBody] PlaylistSongDTO playlistSongDTO)
         {
@@ -58,18 +95,36 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var newPlaylistSong = new PlaylistSong
             {
                 PlaylistID = playlistSongDTO.PlaylistID,
                 SongID = playlistSongDTO.SongID,
                 Order = playlistSongDTO.Order
-
             };
+
             _context.PlaylistSongs.Add(newPlaylistSong);
             await _context.SaveChangesAsync();
+
             playlistSongDTO.PlaylistSongId = newPlaylistSong.PlaylistSongId;
+
             return CreatedAtAction(nameof(GetPlaylistSong), new { id = newPlaylistSong.PlaylistSongId }, playlistSongDTO);
         }
+
+        /// <summary>
+        /// Updates an existing PlaylistSong entry
+        /// </summary>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <param name="playlistSongDTO">Updated PlaylistSongDTO object</param>
+        /// <returns>
+        /// 200 OK with updated object<br/>
+        /// 400 Bad Request if ID mismatch<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// PUT: api/PlaylistSong/5<br/>
+        /// Body: { "playlistSongId": 5, "playlistID": 1, "songID": 2, "order": 3 }
+        /// </example>
         [HttpPut("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> UpdatePlaylistSong([FromRoute] int id, [FromBody] PlaylistSongDTO playlistSongDTO)
         {
@@ -77,6 +132,7 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var playlistSongToUpdate = await _context.PlaylistSongs.FindAsync(id);
             if (playlistSongToUpdate == null)
             {
@@ -91,6 +147,18 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(playlistSongToUpdate);
         }
+
+        /// <summary>
+        /// Deletes a PlaylistSong entry by ID
+        /// </summary>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <returns>
+        /// 200 OK with deleted PlaylistSong object<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// DELETE: api/PlaylistSong/4
+        /// </example>
         [HttpDelete("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> DeletePlaylistSong([FromRoute] int id)
         {
@@ -107,4 +175,3 @@ namespace Wedding_Playlist.Controllers
         }
     }
 }
-

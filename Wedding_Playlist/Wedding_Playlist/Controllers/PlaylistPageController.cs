@@ -1,18 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Models;
-
+using Wedding_Playlist.Controllers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-namespace MilestoneManager.Controllers
+using Microsoft.AspNetCore.Authorization;
+
+namespace Wedding_Playlist.Controllers
 {
-    public class PlaylistPageController : Controller
+    public class PlaylistPageController : BaseController
     {
         private readonly IPlaylistService _playlistService;
         private readonly IPlaylistSongService _playlistSongService;
         private readonly ISongService _songService;
 
-        public PlaylistPageController(IPlaylistService playlistService, IPlaylistSongService playlistSongService, ISongService songService)
+        public PlaylistPageController(
+            IPlaylistService playlistService, 
+            IPlaylistSongService playlistSongService, 
+            ISongService songService,
+            IDashboardService dashboardService)
+            : base(dashboardService)
         {
             _playlistService = playlistService;
             _playlistSongService = playlistSongService;
@@ -86,6 +93,7 @@ namespace MilestoneManager.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var playlist = await _playlistService.GetPlaylist(id);
@@ -102,6 +110,7 @@ namespace MilestoneManager.Controllers
             return View(playlistDto);
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPlaylist(PlaylistDTO playlistDto)
         {
@@ -116,6 +125,7 @@ namespace MilestoneManager.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var playlist = await _playlistService.GetPlaylist(id);
@@ -135,6 +145,7 @@ namespace MilestoneManager.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePlaylist(int id)
         {
