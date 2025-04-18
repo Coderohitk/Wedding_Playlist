@@ -17,17 +17,17 @@ namespace Wedding_Playlist.Controllers
         }
 
         /// <summary>
-        /// Gets all playlist songs.
-        /// Returns
-        /// List of PlaylistSongDTO objects.
-        /// This method is an asynchronous operation that calls the database to fetch all playlist songs.  
-        /// It then maps each playlist song to a PlaylistSongDTO object and returns the list as an ActionResult.  
-        /// If there are no playlist songs, it returns an empty list.  
-        /// This method is marked as a GET request and has no parameters.
+        /// Returns a list of all PlaylistSong entries
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 200 OK<br/>
+        /// [{PlaylistSongDTO}, {PlaylistSongDTO}, ...]
+        /// </returns>
+        /// <example>
+        /// GET: api/PlaylistSong
+        /// </example>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlaylistDTO>>> GetAllPlaylistSongs()
+        public async Task<ActionResult<IEnumerable<PlaylistSongDTO>>> GetAllPlaylistSongs()
         {
             var playlistSongs = await _context.PlaylistSongs
                 .Select(s => new PlaylistSongDTO
@@ -37,30 +37,34 @@ namespace Wedding_Playlist.Controllers
                     SongID = s.SongID,
                     Order = s.Order
                 }).ToListAsync();
+
             return Ok(playlistSongs);
         }
 
         /// <summary>
-        /// Gets a specific playlist song by ID.
-        /// Returns
-        /// An PlaylistSongDTO object if found; otherwise, 404 NotFound.
-        /// This method takes an integer `id` as a parameter and queries the database for a playlist song with the matching ID.  
-        /// If a playlist song is found, it returns an HTTP 200 response with the playlist song details.  
-        /// If no playlist song matches the provided ID, it returns an HTTP 404 Not Found response.  
-        /// This helps ensure that only valid playlist songs are accessed in the system.  
-        /// The method is useful for retrieving playlist song details in a detailed view.
+        /// Returns a specific PlaylistSong entry by ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <returns>
+        /// 200 OK<br/>
+        /// {PlaylistSongDTO}<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// GET: api/PlaylistSong/5
+        /// </example>
         [HttpGet("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> GetPlaylistSong(int id)
         {
             var playlistSong = await _context.PlaylistSongs
-                .Where(ps => ps.PlaylistSongId == id).FirstOrDefaultAsync();
+                .Where(ps => ps.PlaylistSongId == id)
+                .FirstOrDefaultAsync();
+
             if (playlistSong == null)
             {
                 return NotFound();
             }
+
             var playlistSongDTO = new PlaylistSongDTO
             {
                 PlaylistSongId = playlistSong.PlaylistSongId,
@@ -68,15 +72,22 @@ namespace Wedding_Playlist.Controllers
                 SongID = playlistSong.SongID,
                 Order = playlistSong.Order
             };
+
             return Ok(playlistSongDTO);
         }
+
         /// <summary>
-        /// Adds a new playlist song to the database.
-        /// Returns
-        /// Status with CreatedId or error message.
+        /// Creates a new PlaylistSong entry
         /// </summary>
-        /// <param name="playlistSongDTO"></param>
-        /// <returns></returns>
+        /// <param name="playlistSongDTO">PlaylistSongDTO object</param>
+        /// <returns>
+        /// 201 Created<br/>
+        /// URI to newly created resource
+        /// </returns>
+        /// <example>
+        /// POST: api/PlaylistSong<br/>
+        /// Body: { "playlistID": 1, "songID": 2, "order": 3 }
+        /// </example>
         [HttpPost]
         public async Task<ActionResult<PlaylistSongDTO>> CreatePlaylistSong([FromBody] PlaylistSongDTO playlistSongDTO)
         {
@@ -84,32 +95,36 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var newPlaylistSong = new PlaylistSong
             {
                 PlaylistID = playlistSongDTO.PlaylistID,
                 SongID = playlistSongDTO.SongID,
                 Order = playlistSongDTO.Order
-
             };
+
             _context.PlaylistSongs.Add(newPlaylistSong);
             await _context.SaveChangesAsync();
+
             playlistSongDTO.PlaylistSongId = newPlaylistSong.PlaylistSongId;
+
             return CreatedAtAction(nameof(GetPlaylistSong), new { id = newPlaylistSong.PlaylistSongId }, playlistSongDTO);
         }
+
         /// <summary>
-        /// Updates an existing playlist song in the database.
-        /// Returns
-        /// Status with error message if not found.
-        /// This method takes an integer `id` as a parameter and an updated `PlaylistSongDTO` object in the request body.  
-        /// It then updates the playlist song in the database with the new details.  
-        /// If the ID in the URL does not match the one in the object, it returns an HTTP 400 Bad Request response.  
-        /// If the playlist song does not exist, an HTTP 404 Not Found response is returned.  
-        /// On successful update, the method returns an HTTP 204 No Content response.  
-        /// This ensures that modifications to playlist songs are properly validated and processed.
+        /// Updates an existing PlaylistSong entry
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="playlistSongDTO"></param>
-        /// <returns></returns>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <param name="playlistSongDTO">Updated PlaylistSongDTO object</param>
+        /// <returns>
+        /// 200 OK with updated object<br/>
+        /// 400 Bad Request if ID mismatch<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// PUT: api/PlaylistSong/5<br/>
+        /// Body: { "playlistSongId": 5, "playlistID": 1, "songID": 2, "order": 3 }
+        /// </example>
         [HttpPut("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> UpdatePlaylistSong([FromRoute] int id, [FromBody] PlaylistSongDTO playlistSongDTO)
         {
@@ -117,6 +132,7 @@ namespace Wedding_Playlist.Controllers
             {
                 return BadRequest();
             }
+
             var playlistSongToUpdate = await _context.PlaylistSongs.FindAsync(id);
             if (playlistSongToUpdate == null)
             {
@@ -131,18 +147,18 @@ namespace Wedding_Playlist.Controllers
 
             return Ok(playlistSongToUpdate);
         }
+
         /// <summary>
-        /// Deletes a playlist song from the database.
-        /// Returns
-        /// Status with error message if not found.  
-        /// This method takes an integer `id` as a parameter and attempts to remove the corresponding playlist song record.  
-        /// If the playlist song exists, it is deleted, and an HTTP 200 OK response with a confirmation message is returned.  
-        /// If the playlist song does not exist, an HTTP 404 Not Found response is returned.  
-        /// Any unexpected issues, such as database errors, result in an HTTP 500 Internal Server Error response.  
-        /// This method ensures proper deletion while handling errors gracefully.
+        /// Deletes a PlaylistSong entry by ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">PlaylistSong ID</param>
+        /// <returns>
+        /// 200 OK with deleted PlaylistSong object<br/>
+        /// 404 Not Found if not found
+        /// </returns>
+        /// <example>
+        /// DELETE: api/PlaylistSong/4
+        /// </example>
         [HttpDelete("{id}")]
         public async Task<ActionResult<PlaylistSongDTO>> DeletePlaylistSong([FromRoute] int id)
         {
@@ -159,4 +175,3 @@ namespace Wedding_Playlist.Controllers
         }
     }
 }
-

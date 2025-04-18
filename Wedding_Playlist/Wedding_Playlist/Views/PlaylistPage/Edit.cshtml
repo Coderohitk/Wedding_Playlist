@@ -8,13 +8,19 @@
     }
 
     .form-container {
-        width: 100%;
-        max-width: 600px;
+        max-width: 800px;
         margin: 2rem auto;
-        padding: 30px;
+        padding: 2rem;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
         border-radius: 31px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+    }
+
+    h2 {
+        color: #000;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     .form-group {
@@ -31,17 +37,17 @@
     .form-control {
         width: 100%;
         padding: 12px 15px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(176, 139, 111, 0.5);
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.8);
         transition: all 0.3s ease;
     }
 
-        .form-control:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
-            background: white;
-        }
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(176, 139, 111, 0.3);
+        background: white;
+    }
 
     .btn {
         padding: 10px 20px;
@@ -50,23 +56,22 @@
         cursor: pointer;
         transition: 0.3s;
         text-decoration: none;
-        display: inline-block;
-        text-align: center;
+        font-weight: bold;
+        margin-right: 10px;
     }
 
     .btn-primary {
-        background-color: #d9b497;
+        background: #d9b497;
         color: white;
     }
 
     .btn-secondary {
-        background-color: #B08B6F;
+        background: #B08B6F;
         color: white;
     }
 
     .btn:hover {
-        background-color: #B08B6F;
-        color: white;
+        opacity: 0.9;
     }
 
     .text-danger {
@@ -74,42 +79,30 @@
         font-size: 0.9rem;
         margin-top: 0.25rem;
     }
-
-    h2 {
-        color: #000;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
 </style>
 
-<div class="custom-container">
-    <div class="custom-card">
-        <div class="card-header">
-            <h2>Edit Playlist</h2>
+<div class="form-container">
+    <h2>Edit Playlist</h2>
+    <form asp-action="EditPlaylist" method="post">
+        <input type="hidden" asp-for="PlaylistID" />
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Playlist Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="card-body">
-            <form asp-action="EditPlaylist" method="post">
-                <input type="hidden" asp-for="PlaylistID" />
 
-                <div class="form-group">
-                    <label class="form-label" asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control" required />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" asp-for="CreatedBy"></label>
-                    <input asp-for="CreatedBy" class="form-control" required />
-                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
-                </div>
-
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a asp-action="ListPlaylist" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="control-label">Created By</label>
+            <input asp-for="CreatedBy" class="form-control" required />
+            <span asp-validation-for="CreatedBy" class="text-danger"></span>
         </div>
-    </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="ListPlaylist" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

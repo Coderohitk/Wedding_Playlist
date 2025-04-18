@@ -258,7 +258,59 @@
     ]
   },
   {
-    "ContainingType": "MilestoneManager.Controllers.GuestAPIController",
+    "ContainingType": "Wedding_Playlist.Controllers.EventGuestController",
+    "Method": "GetEventGuestByEventID",
+    "RelativePath": "api/EventGuest/event/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Wedding_Playlist.Models.EventGuestDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.EventGuestController",
+    "Method": "GetEventGuestByGuestID",
+    "RelativePath": "api/EventGuest/guest/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Wedding_Playlist.Models.EventGuestDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.GuestAPIController",
     "Method": "DeleteGuest",
     "RelativePath": "api/GuestAPI/DeleteGuest/{id}",
     "HttpMethod": "DELETE",
@@ -284,7 +336,7 @@
     ]
   },
   {
-    "ContainingType": "MilestoneManager.Controllers.GuestAPIController",
+    "ContainingType": "Wedding_Playlist.Controllers.GuestAPIController",
     "Method": "FindGuest",
     "RelativePath": "api/GuestAPI/GetGuestById",
     "HttpMethod": "GET",
@@ -310,7 +362,7 @@
     ]
   },
   {
-    "ContainingType": "MilestoneManager.Controllers.GuestAPIController",
+    "ContainingType": "Wedding_Playlist.Controllers.GuestAPIController",
     "Method": "GetGuest",
     "RelativePath": "api/GuestAPI/Guest",
     "HttpMethod": "GET",
@@ -330,7 +382,7 @@
     ]
   },
   {
-    "ContainingType": "MilestoneManager.Controllers.GuestAPIController",
+    "ContainingType": "Wedding_Playlist.Controllers.GuestAPIController",
     "Method": "UpdateGuest",
     "RelativePath": "api/GuestAPI/UpdateGuest/{id}",
     "HttpMethod": "PUT",
@@ -480,6 +532,22 @@
     ]
   },
   {
+    "ContainingType": "Wedding_Playlist.Controllers.GuestSongRequestController",
+    "Method": "GetGuestSongRequestById",
+    "RelativePath": "api/GuestSongRequest/details/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Wedding_Playlist.Controllers.PlaylistAPIController",
     "Method": "CreatePlaylist",
     "RelativePath": "api/PlaylistAPI/AddPlaylist",
@@ -598,7 +666,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.PlaylistDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Wedding_Playlist.Models.PlaylistSongDTO, Wedding_Playlist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -825,5 +893,93 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.EventSongController",
+    "Method": "GetEventSong",
+    "RelativePath": "EventSong/EventSong",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.EventSongController",
+    "Method": "FindEventSongByEvent",
+    "RelativePath": "EventSong/GetEventSongByEvent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.EventSongController",
+    "Method": "FindEventSong",
+    "RelativePath": "EventSong/GetEventSongById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Wedding_Playlist.Controllers.EventSongController",
+    "Method": "FindEventSongBySong",
+    "RelativePath": "EventSong/GetEventSongBySong",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "songId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -8,8 +8,14 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow:
+    0 0 0 0.1rem white,
+    0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -19,4 +25,87 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6c757d;
+  font-weight: 300;
+}
+
+.dashboard-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 100%;
+  background-color: white;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card-header {
+  background-color: #f1f3f5;
+  border-radius: 10px 10px 0 0;
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.dashboard-card-body {
+  padding: 15px;
+}
+
+.dashboard-card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.dashboard-card-value {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.dashboard-card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  padding: 10px 15px;
+  border-radius: 0 0 10px 10px;
+}
+
+.dashboard-progress {
+  height: 8px;
+  margin-top: 10px;
+}
+
+.event-item {
+  padding: 5px 0;
+  border-bottom: 1px dotted #dee2e6;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-date {
+  font-weight: 600;
+  color: #495057;
+}
+
+.event-description {
+  color: #6c757d;
+  font-size: 0.9rem;
 }

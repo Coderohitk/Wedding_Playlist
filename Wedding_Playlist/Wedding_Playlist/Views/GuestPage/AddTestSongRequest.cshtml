@@ -1,0 +1,114 @@
+@model Wedding_Playlist.Models.GuestSongRequestDTO
+@{
+    ViewData["Title"] = "Add Song Request";
+    var guestId = (int)ViewData["GuestId"];
+    var guestName = ViewData["GuestName"] as string;
+    var songs = ViewData["Songs"] as List<Wedding_Playlist.Models.Song>;
+    var events = ViewData["Events"] as List<Wedding_Playlist.Models.Event>;
+}
+
+<style>
+    body {
+        background: #EFE5DC;
+    }
+
+    .page-title {
+        color: #000;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #d9b497;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #B08B6F;
+        color: white;
+    }
+</style>
+
+<div class="container">
+    <h1 class="page-title">Add Song Request for @guestName</h1>
+    
+    <div class="form-container">
+        <form asp-action="AddTestSongRequest" method="post">
+            <div class="form-group">
+                <label for="GuestID">Guest ID:</label>
+                <input type="hidden" class="form-control" id="GuestID" name="GuestID" value="@guestId" readonly />
+                <input type="text" class="form-control" value="@guestName" readonly />
+            </div>
+            
+            <div class="form-group">
+                <label for="EventID">Event:</label>
+                <select class="form-control" id="EventID" name="EventID" required>
+                    <option value="">Select an Event</option>
+                    @foreach (var evt in events)
+                    {
+                        <option value="@evt.EventId">@evt.Name</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="SongID">Song:</label>
+                <select class="form-control" id="SongID" name="SongID" required>
+                    <option value="">Select a Song</option>
+                    @foreach (var song in songs)
+                    {
+                        <option value="@song.SongId">@song.Title - @song.Artist</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="Status">Status:</label>
+                <select class="form-control" id="Status" name="Status">
+                    <option value="Pending">Pending (Will need approval)</option>
+                    <option value="Approved">Approved (Will be automatically added to event playlist)</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <small class="form-text text-muted">Note: Approved songs are automatically added to the event's playlist.</small>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Request</button>
+                <a asp-action="Details" asp-route-id="@guestId" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div> 

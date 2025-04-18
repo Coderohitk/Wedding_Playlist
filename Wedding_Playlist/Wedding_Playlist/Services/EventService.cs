@@ -2,7 +2,8 @@ using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Models;
 using Wedding_Playlist.Data;
 using Microsoft.EntityFrameworkCore;
-namespace Wedding_Playlist.Services
+
+namespace CoreEntityFramework.Services
 {
     public class EventService : IEventService
     {
@@ -28,14 +29,14 @@ namespace Wedding_Playlist.Services
             }
             return eventlist;
         }
-        public async Task<EventDTO> GetEventById(int id)
+        public async Task<Event> GetEventById(int id)
         {
             var event1 = await _context.Events.FindAsync(id);
             if (event1 == null)
             {
                 return null;
             }
-            EventDTO events = new EventDTO()
+            Event events = new Event()
             {
                 EventId = event1.EventId,
                 Name = event1.Name,

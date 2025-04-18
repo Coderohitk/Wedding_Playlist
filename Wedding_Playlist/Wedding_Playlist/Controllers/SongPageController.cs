@@ -1,16 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreEntityFramework.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Wedding_Playlist.Interfaces;
 using Wedding_Playlist.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Wedding_Playlist.Controllers
 {
-    public class SongPageController : Controller
+    public class SongPageController : BaseController
     {
         private readonly ISongService _songService;
+        private readonly IEventService _eventService;
+        private readonly IPlaylistService _playlistService;
+        private readonly IEventSongService _eventSongService;
+        private readonly IPlaylistSongService _playlistSongService;
 
-        public SongPageController(ISongService songService)
+        public SongPageController(
+            ISongService songService, 
+            IEventService eventService, 
+            IPlaylistService playlistService, 
+            IEventSongService eventSongService, 
+            IPlaylistSongService playlistSongService,
+            IDashboardService dashboardService)
+            : base(dashboardService)
         {
             _songService = songService;
+            _eventService = eventService;
+            _playlistService = playlistService;
+            _eventSongService = eventSongService;
+            _playlistSongService = playlistSongService;
         }
 
         public async Task<IActionResult> Index()
@@ -28,29 +46,84 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var eventList = await _eventService.GetEvents();
+            var playlistList = await _playlistService.GetAllPlaylists();
+            
+            var viewModel = new SongCreateViewModel
+            {
+                Song = new SongDTO(),
+                EventSelections = eventList.Select(e => new EventSelection { EventId = e.EventId, IsSelected = false }).ToList(),
+                PlaylistSelections = playlistList.Select(p => new PlaylistSelection { PlaylistID = p.PlaylistID, IsSelected = false }).ToList()
+            };
+            
+            ViewData["EventsList"] = eventList.ToList();
+            ViewData["Playlist"] = playlistList.ToList();
+            
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SongDTO songDTO)
+        public async Task<IActionResult> Create(SongCreateViewModel viewModel, IFormCollection form)
         {
             if (!ModelState.IsValid)
             {
-                return View(songDTO);
+                var eventList = await _eventService.GetEvents();
+                var playlistList = await _playlistService.GetAllPlaylists();
+                ViewData["EventsList"] = eventList.ToList();
+                ViewData["Playlist"] = playlistList.ToList();
+                return View(viewModel);
             }
-            var response = await _songService.CreateSong(songDTO);
-            if (response.Status == ServiceResponse.ServiceStatus.Created)
+            
+            // Create the song
+            var songResponse = await _songService.CreateSong(viewModel.Song);
+            if (songResponse.Status != ServiceResponse.ServiceStatus.Created)
             {
-                return RedirectToAction(nameof(Index));
+                TempData["Error"] = string.Join("; ", songResponse.Messages);
+                return View(viewModel);
             }
-            TempData["Error"] = string.Join("; ", response.Messages);
-            return View(songDTO);
+            
+            int songId = songResponse.CreatedId;
+            
+            // Process event selections from form data
+            string[] eventSelections = form["EventSelections"].ToArray();
+            foreach (var eventIdStr in eventSelections)
+            {
+                if (!string.IsNullOrEmpty(eventIdStr) && int.TryParse(eventIdStr, out int eventId))
+                {
+                    var eventSongDTO = new EventSongDTO
+                    {
+                        EventId = eventId,
+                        SongId = songId
+                    };
+                    
+                    await _eventSongService.AddEventSong(eventSongDTO);
+                }
+            }
+            
+            // Process playlist selections from form data
+            string[] playlistSelections = form["PlaylistSelections"].ToArray();
+            foreach (var playlistIdStr in playlistSelections)
+            {
+                if (!string.IsNullOrEmpty(playlistIdStr) && int.TryParse(playlistIdStr, out int playlistId))
+                {
+                    var playlistSongDTO = new PlaylistSongDTO
+                    {
+                        PlaylistID = playlistId,
+                        SongID = songId
+                    };
+                    
+                    await _playlistSongService.CreatePlaylistSong(playlistSongDTO);
+                }
+            }
+            
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var song = await _songService.GetSong(id);
@@ -71,6 +144,7 @@ namespace Wedding_Playlist.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SongDTO songDTO)
         {
@@ -87,6 +161,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var song = await _songService.GetSong(id);
@@ -108,6 +183,7 @@ namespace Wedding_Playlist.Controllers
 
 
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
