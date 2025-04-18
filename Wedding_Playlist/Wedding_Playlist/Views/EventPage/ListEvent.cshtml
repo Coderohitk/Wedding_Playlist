@@ -25,10 +25,10 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@item.Date.ToString("MMM dd, yyyy")</td>
                     <td>@Html.DisplayFor(modelItem => item.Location)</td>
-                    <td class="action-icons">
-                        <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-                        <a asp-action="Details" asp-route-id="@item.EventId">Details</a>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EventId" class="btn btn-warning btn-sm">✏️</a>
+                        <a asp-action="Delete" asp-route-id="@item.EventId" class="btn btn-danger btn-sm">🗑</a>
+                        <a asp-action="Details" asp-route-id="@item.EventId" class="btn btn-info btn-sm">Details</a>
                     </td>
                 </tr>
             }
