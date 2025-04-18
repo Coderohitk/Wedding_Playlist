@@ -1,0 +1,114 @@
+﻿@model Wedding_Playlist.Models.GuestDTO
+@{
+    ViewData["Title"] = "Confirm Delete";
+}
+
+<style>
+    body {
+        background: #EFE5DC;
+    }
+
+    .custom-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 20px;
+    }
+
+    .custom-card {
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        border-radius: 31px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+    }
+
+    .custom-dl {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .custom-dt {
+        font-weight: bold;
+        color: #000;
+    }
+
+    .custom-dd {
+        color: #555;
+        margin: 0;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-danger {
+        background: #B08B6F;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #d9b497;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    h1,
+    h3,
+    h4 {
+        color: #000;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+    }
+</style>
+
+<div class="custom-container">
+    <div class="custom-card">
+        <div class="delete-header">
+            <h2>Delete Guest</h2>
+            <h3>Are you sure you want to delete this guest?</h3>
+        </div>
+
+        <div class="delete-details">
+            <h4>@Model.Name</h4>
+            <p>Email: @Model.Email</p>
+            <p>RSVP: @Model.RSVP_Status</p>
+            <p>Side: @Model.Side</p>
+        </div>
+
+        <form asp-action="Delete" method="post">
+
+            <input type="hidden" asp-for="GuestId" />
+            <div class="btn-group">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
