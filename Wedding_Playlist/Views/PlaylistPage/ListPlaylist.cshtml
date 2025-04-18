@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Wedding_Playlist.Models.PlaylistDTO>
+@{
+    ViewData["Title"] = "Playlists";
+}
+
+<h1 class="page-title">Playlists</h1>
+
+<div class="button-container">
+    <a asp-action="Create" class="btn btn-primary">Create New Playlist</a>
+</div>
+
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>
+                    <td class="action-icons">
+                        <a asp-action="Details" asp-route-id="@item.PlaylistID">Details</a>
+                        <a asp-action="Edit" asp-route-id="@item.PlaylistID">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.PlaylistID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

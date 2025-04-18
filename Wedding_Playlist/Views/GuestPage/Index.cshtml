@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Wedding_Playlist.Models.GuestDTO>
+@{
+    ViewData["Title"] = "List Guests";
+}
+
+<h1 class="page-title">List of Guests</h1>
+
+<div class="button-container">
+    <a asp-action="Create" class="btn">Add New Guest</a>
+</div>
+
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.RSVP_Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Side)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.RSVP_Status</td>
+                    <td>@item.Side</td>
+                    <td class="action-icons">
+                        <a asp-action="Edit" asp-route-id="@item.GuestId">✏️</a>
+                        <a asp-action="Delete" asp-route-id="@item.GuestId">🗑</a>
+                            <a asp-action="Details" asp-route-id="@item.GuestId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        background: #EFE5DC;
+    }
+
+    .table-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
+        padding: 0px;
+        border-radius: 31px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 31px;
+        overflow: hidden;
+        background: linear-gradient(153deg, #FBFEFB 31.55%, #EFE5DC 98.87%);
+        opacity: 50;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 10px;
+        background-color: #d9b497;
+    }
+
+        .btn:hover {
+            background-color: #B08B6F;
+        }
+
+    .styled-table thead th {
+        color: rgb(0, 0, 0);
+        padding: 12px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .styled-table thead tr:first-child th:first-child {
+        border-top-left-radius: 31px;
+    }
+
+    .styled-table thead tr:first-child th:last-child {
+        border-top-right-radius: 31px;
+    }
+
+    .styled-table tbody tr:hover {
+        background: linear-gradient(to right, #fff7ef, #ebdbce);
+        transition: 0.3s;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .styled-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+        .styled-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 31px;
+        }
+
+        .styled-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 31px;
+        }
+
+    .action-icons {
+        display: flex;
+        gap: 8px;
+    }
+
+        .action-icons a {
+            text-decoration: none;
+            color: white;
+            background: #B08B6F;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+            .action-icons a:hover {
+                background: #DFC3AE;
+            }
+</style>
