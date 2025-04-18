@@ -109,6 +109,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             var eventList = await _eventService.GetEvents();
@@ -117,6 +118,7 @@ namespace Wedding_Playlist.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GuestDTO guestDTO, int[] selectedEvents)
         {

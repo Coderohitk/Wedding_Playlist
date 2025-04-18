@@ -4,7 +4,6 @@ using Wedding_Playlist.Data;
 using Wedding_Playlist.Models;
 using Wedding_Playlist.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-
 namespace Wedding_Playlist.Controllers
 {
     public class EventPageController : BaseController
@@ -12,7 +11,7 @@ namespace Wedding_Playlist.Controllers
         private readonly IEventService _eventService;
         private readonly IGuestService _guestService;
         private readonly IEventGuestService _eventGuestService;
-        private readonly IEventSongService _eventSongService;
+        private readonly IEventSongService _EventSongService;
         private readonly ISongService _songService;
 
         public EventPageController(
@@ -27,64 +26,61 @@ namespace Wedding_Playlist.Controllers
             _eventService = eventService;
             _guestService = guestService;
             _eventGuestService = eventGuestService;
-            _eventSongService = eventSongService;
+            _EventSongService = eventSongService;
             _songService = songService;
         }
-
         public IActionResult Index()
         {
             return RedirectToAction("ListEvent");
         }
-
         public async Task<IActionResult> ListEvent()
         {
             var events = await _eventService.GetEvents();
-            var eventDTO = events.Select(x => new EventDTO
+            var eventDTO = events.Select(x => new EventDTO()
             {
                 EventId = x.EventId,
                 Name = x.Name,
                 Date = x.Date,
-                Location = x.Location
-            });
+                Location = x.Location,
 
+
+            }
+            );
             return View(eventDTO);
         }
-
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var events = await _eventService.GetEventById(id);
-            var eventGuests = await _eventGuestService.GetEventGuestsbyEventId(id);
-            var eventSongs = await _eventSongService.GetEventSongbyEventId(id);
-
-            List<Guest> guestList = new List<Guest>();
-            foreach (var item in eventGuests)
+            var eventguest = await _eventGuestService.GetEventGuestsbyEventId(id);
+            var eventsong = await _EventSongService.GetEventSongbyEventId(id);
+            List<Guest> guestlist = new List<Guest>();
+            foreach (var item in eventguest)
             {
                 var guest = await _guestService.GetGuestById(item.GuestId);
-                guestList.Add(guest);
+                guestlist.Add(guest);
             }
-
-            List<Song> songList = new List<Song>();
-            foreach (var song in eventSongs)
+            List<Song> songlist = new List<Song>();
+            foreach (var songs in eventsong)
             {
-                var songDetails = await _songService.GetSong(song.SongId);
-                songList.Add(songDetails);
+                var eventsonglist = await _songService.GetSong(songs.SongId);
+                songlist.Add(eventsonglist);
             }
-
             ViewData["EventName"] = events.Name;
-            ViewData["Guests"] = guestList;
-            ViewData["Songs"] = songList;
-
+            ViewData["Guests"] = guestlist;
+            ViewData["Songs"] = songlist;
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
-        }
 
+        }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EventDTO eventDTO)
         {
@@ -93,50 +89,57 @@ namespace Wedding_Playlist.Controllers
             {
                 return RedirectToAction("ListEvent", "EventPage");
             }
-
-            return RedirectToAction("Create", "EventPage");
+            else
+            {
+                return RedirectToAction("Create", "EventPage");
+            }
         }
-
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var eventDTO = await _eventService.GetEventById(id);
-            if (eventDTO == null) return NotFound();
-
-            return View(new EventDTO
+            if (eventDTO == null)
+            {
+                return NotFound();
+            }
+            var model = new EventDTO()
             {
                 EventId = eventDTO.EventId,
                 Name = eventDTO.Name,
                 Date = eventDTO.Date,
                 Location = eventDTO.Location
-            });
+            };
+            return View(model);
         }
-
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EventDTO eventDTO)
         {
             var response = await _eventService.UpdateEvent(eventDTO);
+
             if (response.Status == ServiceResponse.ServiceStatus.Updated)
             {
+                // ? Go back to the list page after a successful update
                 return RedirectToAction("ListEvent", "EventPage");
             }
 
+            // ? If something went wrong, return the same view with the current model
             return View(eventDTO);
         }
-
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var eventDTO = await _eventService.GetEventById(id);
-            if (eventDTO == null) return NotFound();
+            if (eventDTO == null)
+            {
+                return NotFound();
+            }
 
-            return View(eventDTO);
+            return View(eventDTO); // This will render your delete confirmation page
         }
-
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -147,8 +150,13 @@ namespace Wedding_Playlist.Controllers
             {
                 return RedirectToAction("ListEvent", "EventPage");
             }
+            else
+            {
+                return RedirectToAction("Delete", "EventPage");
+            }
 
-            return RedirectToAction("Delete", "EventPage");
         }
     }
 }
+
+

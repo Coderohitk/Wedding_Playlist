@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wedding_Playlist")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4976c7722cb353e04c13ef859ca56b7065a0db32")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55b1864533c5ad230dc186ac4c7fd5a270d612f5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wedding_Playlist")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wedding_Playlist")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

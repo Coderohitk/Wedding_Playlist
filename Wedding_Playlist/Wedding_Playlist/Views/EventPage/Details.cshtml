@@ -3,11 +3,15 @@
     var EventName = ViewData["EventName"] as String;
     var GuestList = ViewData["Guests"] as List<Guest>;
     var SongList = ViewData["Songs"] as List<Song>;
+
+
 }
 
 <style>
+    /* Reuse existing styling */
     body {
         background: #EFE5DC;
+
     }
 
     .page-title {
@@ -22,6 +26,7 @@
         text-align: right;
     }
 
+    /* Table styling matching previous implementations */
     .table-container {
         width: 100%;
         max-width: 1000px;
@@ -57,6 +62,7 @@
         background: linear-gradient(to right, #fff7ef, #ebdbce);
     }
 
+    /* Button styling */
     .btn {
         padding: 10px 20px;
         border: none;
@@ -87,40 +93,39 @@
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
-
-    h2 {
-        font-size: 1.1rem;
+    h2{
+    font-size:1.1rem;
     }
 </style>
 
-<h1 class="page-title">Event: @EventName</h1>
 
+<h1>Event : @EventName</h1>
 <div class="table-container">
-    <h2>Guest List</h2>
     <table class="styled-table">
+        <h2>Guest List</h2>
         <thead>
             <tr>
                 <th>Guest Name</th>
                 <th>Email</th>
                 <th>RSVP</th>
-                <th>Side</th>
+                <th>Description</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in GuestList)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Email</td>
-                    <td>@item.RSVP_Status</td>
-                    <td>@item.Side</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        @foreach (var item in GuestList)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.RSVP_Status</td>
+                <td>@item.Side</td>
 
-    <h2>Song List</h2>
+            </tr>
+        }
+
+
+    </table>
     <table class="styled-table">
+        <h2>Song List</h2>
         <thead>
             <tr>
                 <th>Title</th>
@@ -129,17 +134,20 @@
                 <th>Description</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in SongList)
-            {
+        @foreach (var item in SongList)
+        {
+            <tbody>
                 <tr>
                     <td>@item.Title</td>
                     <td>@item.Artist</td>
                     <td>@item.Genre</td>
                     <td>@item.Description</td>
+
                 </tr>
-            }
-        </tbody>
+            </tbody>
+        }
+
+
     </table>
 
     <a asp-action="ListEvent" class="btn btn-secondary">Back to List</a>

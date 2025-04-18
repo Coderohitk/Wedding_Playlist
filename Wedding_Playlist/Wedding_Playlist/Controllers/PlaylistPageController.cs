@@ -74,11 +74,13 @@ namespace Wedding_Playlist.Controllers
             return View(viewModel);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken()]
         public async Task<IActionResult> CreatePlaylist(PlaylistDTO playlistDto)
         {
