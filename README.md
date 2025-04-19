@@ -142,7 +142,12 @@ MilestoneManager/
 ```
 
 ---
-
+## 📁Additional Features
+- Authorization to Add, Edit and Delete Data
+- Filtering on GuestSongRequest based on status of the songs
+- Search functionality to search a user in GuestSongRequest
+- Functional Dashboard on Home Page
+- 
 ## 👥 Team Members & Responsibilities
 
 ### 🎸 Sarrah Gandhi
